@@ -1,0 +1,49 @@
+.intro-card {
+  background: linear-gradient(135deg, #f7e7cc, #fbf7ec);
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.category-chip {
+  padding: 14rpx 24rpx;
+  border-radius: 999rpx;
+  background: #fdf0dc;
+  color: #95663a;
+  font-size: 24rpx;
+}
+
+.category-chip-active {
+  background: #b26a1e;
+  color: #fff;
+}
+
+.item-card {
+  margin-top: 18rpx;
+}
+
+.item-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #3c2c20;
+}
+
+.item-category {
+  font-size: 24rpx;
+  color: #9d6b3d;
+}
+
+.item-desc,
+.item-recommend {
+  margin-top: 14rpx;
+  color: #6c6055;
+  line-height: 1.7;
+}
+
+.tag-row {
+  margin-top: 18rpx;
+}

@@ -1,0 +1,66 @@
+.banner {
+  background: linear-gradient(135deg, #efe2d2, #fbf7f0);
+  overflow: hidden;
+}
+
+.banner-image {
+  width: calc(100% + 56rpx);
+  height: 260rpx;
+  margin: -28rpx -28rpx 22rpx;
+  display: block;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.route-tabs {
+  margin-top: 24rpx;
+  white-space: nowrap;
+}
+
+.route-tab-wrap {
+  display: inline-flex;
+  gap: 16rpx;
+}
+
+.route-tab {
+  padding: 14rpx 26rpx;
+  border-radius: 999rpx;
+  background: #fff3e8;
+  color: #8a5a3d;
+  font-size: 24rpx;
+}
+
+.route-tab-active {
+  background: #a8502f;
+  color: #fff;
+}
+
+.route-panel,
+.stop-card,
+.tip-card {
+  margin-top: 18rpx;
+}
+
+.route-name,
+.stop-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #3a2a21;
+}
+
+.route-duration,
+.stop-time {
+  color: #9a6548;
+  font-size: 24rpx;
+}
+
+.route-suitable,
+.route-description,
+.stop-detail {
+  margin-top: 12rpx;
+  color: #6f6156;
+  line-height: 1.7;
+}
+
+.section {
+  margin-top: 30rpx;
+}

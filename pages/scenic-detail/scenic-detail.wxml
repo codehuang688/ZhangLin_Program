@@ -1,0 +1,65 @@
+<view class="page" wx:if="{{scenicSpot}}">
+  <view class="card hero-card">
+    <image class="spot-image" src="{{scenicSpot.image}}" mode="aspectFill" bindtap="previewGallery" data-current="{{scenicSpot.image}}" />
+    <view class="row-between">
+      <view class="spot-category">{{scenicSpot.category}}</view>
+      <view class="favorite-button" bindtap="toggleFavorite">{{isFavorite ? '已收藏' : '收藏景点'}}</view>
+    </view>
+    <view class="spot-name-row">
+      <view class="spot-name">{{scenicSpot.name}}</view>
+      <view class="spot-audio-meta">{{scenicSpot.audioMeta.narrator}} · {{scenicSpot.audioMeta.duration}}</view>
+    </view>
+    <view class="spot-summary">{{scenicSpot.summary}}</view>
+    <view class="spot-meta">建议停留：{{scenicSpot.duration}} | 所在线索：{{scenicSpot.location}}</view>
+    <scroll-view class="gallery-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="gallery-row">
+        <block wx:for="{{gallery}}" wx:key="*this">
+          <image class="gallery-thumb" src="{{item}}" mode="aspectFill" bindtap="previewGallery" data-current="{{item}}" />
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">看点提要</view>
+    <view class="card">
+      <block wx:for="{{scenicSpot.highlights}}" wx:key="*this">
+        <view class="bullet-item">{{item}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">智能讲解</view>
+    <view class="card audio-card">
+      <view class="row-between">
+        <view class="audio-title">音频讲解</view>
+        <view class="audio-progress">{{audioProgress}}%</view>
+      </view>
+      <view class="audio-time">{{currentTimeText}} / {{durationText}}</view>
+      <view class="audio-desc" wx:if="{{audioMode === 'audio'}}">当前景点已接入真实音频，可直接播放讲解。</view>
+      <view class="audio-desc" wx:else>当前景点暂未接入音频文件，先以讲解文稿分段播放演示替代，后续可直接切换为真实音频。</view>
+      <view class="audio-actions">
+        <view class="audio-button audio-button-primary" bindtap="toggleAudioGuide">
+          {{isAudioPlaying ? '暂停讲解' : '播放讲解'}}
+        </view>
+        <view class="audio-button" bindtap="nextParagraph">下一段</view>
+      </view>
+    </view>
+    <block wx:for="{{scenicSpot.audioGuide}}" wx:key="*this" wx:for-index="index">
+      <view class="card guide-paragraph {{activeAudioIndex === index ? 'guide-paragraph-active' : ''}}">
+        <view class="paragraph-index">第{{index + 1}}段</view>
+        <view>{{item}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section">
+    <view class="section-title">游览提示</view>
+    <view class="card">
+      <block wx:for="{{scenicSpot.tips}}" wx:key="*this">
+        <view class="bullet-item">{{item}}</view>
+      </block>
+    </view>
+  </view>
+</view>

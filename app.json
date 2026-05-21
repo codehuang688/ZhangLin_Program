@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/guide/guide",
+    "pages/culture/culture",
+    "pages/specialty/specialty",
+    "pages/activity/activity",
+    "pages/profile/profile",
+    "pages/scenic-detail/scenic-detail"
+  ],
+  "window": {
+    "navigationBarTitleText": "樟林古港文旅服务",
+    "navigationBarBackgroundColor": "#f7efe5",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f3ef",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#7c6f64",
+    "selectedColor": "#a34d2e",
+    "backgroundColor": "#fffdf9",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/guide/guide",
+        "text": "导览"
+      },
+      {
+        "pagePath": "pages/culture/culture",
+        "text": "文化"
+      },
+      {
+        "pagePath": "pages/specialty/specialty",
+        "text": "风物"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

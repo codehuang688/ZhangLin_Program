@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="card banner">
+    <image class="banner-image" src="{{guideImage}}" mode="aspectFill" />
+    <view class="section-title">全域游玩导览</view>
+    <view class="section-subtitle">针对不同时间预算与游客画像，提供清晰的古港游玩节奏建议</view>
+  </view>
+
+  <scroll-view class="route-tabs" scroll-x="true" show-scrollbar="false">
+    <view class="route-tab-wrap">
+      <block wx:for="{{routePlans}}" wx:key="id">
+        <view
+          class="route-tab {{activeRouteId === item.id ? 'route-tab-active' : ''}}"
+          bindtap="switchRoute"
+          data-id="{{item.id}}"
+        >
+          {{item.name}}
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <view class="card route-panel">
+    <view class="row-between">
+      <view class="route-name">{{activeRoute.name}}</view>
+      <view class="route-duration">{{activeRoute.duration}}</view>
+    </view>
+    <view class="route-suitable">适合人群：{{activeRoute.suitable}}</view>
+    <view class="route-description">{{activeRoute.description}}</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">路线行程</view>
+    <block wx:for="{{activeRoute.stops}}" wx:key="time">
+      <view class="card stop-card">
+        <view class="stop-time">{{item.time}}</view>
+        <view class="stop-title">{{item.title}}</view>
+        <view class="stop-detail">{{item.detail}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section">
+    <view class="section-title">游玩建议</view>
+    <block wx:for="{{travelTips}}" wx:key="*this">
+      <view class="card tip-card">{{item}}</view>
+    </block>
+  </view>
+</view>

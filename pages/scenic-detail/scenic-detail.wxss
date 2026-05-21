@@ -1,0 +1,137 @@
+.hero-card {
+  background: linear-gradient(135deg, #ead8d1, #faf6f4);
+  overflow: hidden;
+}
+
+.spot-image {
+  width: calc(100% + 56rpx);
+  height: 320rpx;
+  margin: -28rpx -28rpx 20rpx;
+  display: block;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.spot-category {
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  border-radius: 999rpx;
+  background: rgba(125, 69, 46, 0.1);
+  color: #8d4e30;
+  font-size: 22rpx;
+}
+
+.favorite-button {
+  padding: 10rpx 20rpx;
+  border-radius: 999rpx;
+  background: #f5e6dd;
+  color: #8d4e30;
+  font-size: 24rpx;
+}
+
+.spot-name-row {
+  margin-top: 20rpx;
+}
+
+.spot-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #33251e;
+}
+
+.spot-audio-meta {
+  margin-top: 10rpx;
+  color: #92674b;
+  font-size: 24rpx;
+}
+
+.spot-summary,
+.spot-meta,
+.guide-paragraph,
+.bullet-item {
+  margin-top: 14rpx;
+  color: #6f6258;
+  line-height: 1.75;
+}
+
+.section {
+  margin-top: 30rpx;
+}
+
+.gallery-scroll {
+  margin-top: 20rpx;
+  white-space: nowrap;
+}
+
+.gallery-row {
+  display: inline-flex;
+  gap: 16rpx;
+}
+
+.gallery-thumb {
+  width: 180rpx;
+  height: 128rpx;
+  border-radius: 18rpx;
+  flex-shrink: 0;
+}
+
+.guide-paragraph {
+  margin-top: 18rpx;
+}
+
+.guide-paragraph-active {
+  background: #fff2e8;
+  border: 2rpx solid #d68057;
+}
+
+.audio-card {
+  margin-top: 18rpx;
+}
+
+.audio-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #3c2b23;
+}
+
+.audio-progress {
+  color: #a15a35;
+  font-size: 24rpx;
+}
+
+.audio-time {
+  margin-top: 10rpx;
+  color: #94684a;
+  font-size: 24rpx;
+}
+
+.audio-desc {
+  margin-top: 14rpx;
+  line-height: 1.7;
+  color: #6f6258;
+}
+
+.audio-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 22rpx;
+}
+
+.audio-button {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 16rpx;
+  border-radius: 18rpx;
+  background: #f2e4d8;
+  color: #8c4a2b;
+}
+
+.audio-button-primary {
+  background: linear-gradient(135deg, #b85e36, #8f3b22);
+  color: #fff;
+}
+
+.paragraph-index {
+  margin-bottom: 10rpx;
+  color: #9c6a4b;
+  font-size: 22rpx;
+}

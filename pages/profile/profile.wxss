@@ -1,0 +1,93 @@
+.hero-card {
+  background: linear-gradient(135deg, #eadfd4, #fbf7f3);
+  overflow: hidden;
+}
+
+.cover-image {
+  width: calc(100% + 56rpx);
+  height: 280rpx;
+  margin: -28rpx -28rpx 20rpx;
+  display: block;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.profile-badge {
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  border-radius: 999rpx;
+  background: rgba(145, 73, 43, 0.12);
+  color: #8d4e30;
+  font-size: 22rpx;
+}
+
+.profile-name {
+  margin-top: 18rpx;
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #342720;
+}
+
+.profile-desc,
+.service-desc,
+.reminder-card,
+.empty-card {
+  margin-top: 12rpx;
+  line-height: 1.7;
+  color: #6f6258;
+}
+
+.stats {
+  margin-top: 20rpx;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20rpx;
+}
+
+.stat-card,
+.service-card,
+.reminder-card,
+.record-card,
+.empty-card {
+  margin-top: 18rpx;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 42rpx;
+  font-weight: 700;
+  color: #944326;
+}
+
+.stat-label {
+  margin-top: 10rpx;
+  color: #7a6b60;
+  font-size: 24rpx;
+}
+
+.section {
+  margin-top: 30rpx;
+}
+
+.service-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #382a21;
+}
+
+.record-image {
+  width: calc(100% + 56rpx);
+  height: 220rpx;
+  margin: -28rpx -28rpx 22rpx;
+  display: block;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.empty-card {
+  background: #fff8f3;
+}

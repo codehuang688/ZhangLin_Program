@@ -1,0 +1,132 @@
+<view class="page">
+  <view class="hero card">
+    <swiper class="hero-swiper" indicator-dots="true" autoplay="true" interval="3600" circular="true">
+      <block wx:for="{{homeBanners}}" wx:key="id">
+        <swiper-item>
+          <view class="hero-slide" bindtap="handleBannerTap" data-action="{{item.action}}" data-target="{{item.target}}">
+            <image class="hero-image" src="{{item.image}}" mode="aspectFill" />
+            <view class="hero-overlay">
+              <view class="hero-badge">轻量化一体化智慧文旅服务平台</view>
+              <view class="hero-title">{{item.title}}</view>
+              <view class="hero-desc">{{item.subtitle}}</view>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="hero-panel">
+      <view class="hero-brand">樟林古港文旅服务小程序</view>
+      <view class="hero-copy">深度整合红头船文化、侨乡历史文脉、古港遗址与特色古建筑资源，服务广大游玩游客。</view>
+      <view class="hero-actions">
+        <view class="button-primary" bindtap="openGuide">立即开始导览</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="stats grid-2">
+    <block wx:for="{{homeStats}}" wx:key="label">
+      <view class="card stat-card">
+        <view class="stat-value">{{item.value}}</view>
+        <view class="stat-label">{{item.label}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section">
+    <view class="section-title">快捷服务</view>
+    <view class="section-subtitle">把活动、收藏和音频讲解等高频功能前置</view>
+    <view class="quick-grid">
+      <block wx:for="{{quickServices}}" wx:key="title">
+        <view class="card quick-card" bindtap="handleQuickTap" data-action="{{item.action}}" data-target="{{item.target}}">
+          <view class="feature-title">{{item.title}}</view>
+          <view class="feature-desc">{{item.desc}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">核心功能</view>
+    <view class="section-subtitle">围绕讲解、导览、科普与风物推荐组织游客服务入口</view>
+    <view class="feature-list">
+      <block wx:for="{{featureCards}}" wx:key="title">
+        <view class="card feature-card" bindtap="handleFeatureTap" data-action="{{item.action}}" data-target="{{item.target}}">
+          <view class="feature-title">{{item.title}}</view>
+          <view class="feature-desc">{{item.desc}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">推荐景点</view>
+    <view class="section-subtitle">从代表性点位切入，快速建立对樟林古港的整体认知</view>
+    <block wx:for="{{featuredSpots}}" wx:key="id">
+      <view class="card spot-card" bindtap="openSpot" data-id="{{item.id}}">
+        <image class="spot-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="row-between">
+          <view class="spot-name">{{item.name}}</view>
+          <view class="spot-duration">{{item.duration}}</view>
+        </view>
+        <view class="spot-summary">{{item.summary}}</view>
+        <view class="tag-row">
+          <block wx:for="{{item.tags}}" wx:key="*this">
+            <text class="tag">{{item}}</text>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section">
+    <view class="section-title">人气景点</view>
+    <view class="section-subtitle">按图快速浏览重点点位，适合游客先看后决定线路</view>
+    <scroll-view class="popular-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="popular-row">
+        <block wx:for="{{popularSpots}}" wx:key="id">
+          <view class="card popular-card" bindtap="openPopularSpot" data-id="{{item.id}}">
+            <image class="popular-image" src="{{item.image}}" mode="aspectFill" />
+            <view class="popular-name">{{item.name}}</view>
+            <view class="popular-summary">{{item.summary}}</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">近期活动</view>
+    <view class="section-subtitle">导览讲解、夜游体验与研学任务持续更新</view>
+    <block wx:for="{{hotActivities}}" wx:key="id">
+      <view class="card activity-card" bindtap="openActivity">
+        <image class="activity-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="row-between">
+          <view class="route-name">{{item.title}}</view>
+          <view class="activity-status">{{item.status}}</view>
+        </view>
+        <view class="route-desc">{{item.summary}}</view>
+        <view class="muted">{{item.date}} · {{item.place}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section">
+    <view class="section-title">主题线路</view>
+    <view class="section-subtitle">根据游客停留时长与兴趣偏好给出场景化游玩建议</view>
+    <block wx:for="{{routePlans}}" wx:key="id">
+      <view class="card route-card" bindtap="openGuide">
+        <view class="row-between">
+          <view class="route-name">{{item.name}}</view>
+          <view class="route-meta">{{item.duration}}</view>
+        </view>
+        <view class="route-desc">{{item.description}}</view>
+        <view class="muted">适合人群：{{item.suitable}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="card service-card">
+    <view class="section-title">便民服务提示</view>
+    <view class="service-copy">建议游客先浏览导览页确定路线，再进入具体景点详情页收听讲解重点，最后结合文化与风物模块延展体验。</view>
+  </view>
+</view>

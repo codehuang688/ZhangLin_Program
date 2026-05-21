@@ -1,0 +1,76 @@
+<view class="page">
+  <view class="card hero-card">
+    <image class="cover-image" src="{{coverImage}}" mode="aspectFill" />
+    <view class="profile-badge">游客服务中心</view>
+    <view class="profile-name">欢迎来到樟林古港</view>
+    <view class="profile-desc">在这里集中查看活动资讯、文化专题、风物推荐与导览服务入口。</view>
+  </view>
+
+  <view class="stats grid-3">
+    <block wx:for="{{profileStats}}" wx:key="label">
+      <view class="card stat-card">
+        <view class="stat-value">{{item.value}}</view>
+        <view class="stat-label">{{item.label}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section">
+    <view class="section-title">常用服务</view>
+    <block wx:for="{{profileServices}}" wx:key="id">
+      <view class="card service-card" bindtap="openService" data-type="{{item.type}}" data-target="{{item.target}}">
+        <view class="service-title">{{item.title}}</view>
+        <view class="service-desc">{{item.desc}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section">
+    <view class="section-title">收藏景点</view>
+    <block wx:if="{{favoriteSpots.length}}">
+      <block wx:for="{{favoriteSpots}}" wx:key="id">
+        <view class="card record-card" bindtap="openSpot" data-id="{{item.id}}">
+          <image class="record-image" src="{{item.image}}" mode="aspectFill" />
+          <view class="service-title">{{item.name}}</view>
+          <view class="service-desc">{{item.summary}}</view>
+        </view>
+      </block>
+    </block>
+    <view class="card empty-card" wx:else>还没有收藏景点，可以先去景点详情页点击“收藏景点”。</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">最近浏览</view>
+    <block wx:if="{{recentSpots.length}}">
+      <block wx:for="{{recentSpots}}" wx:key="id">
+        <view class="card record-card" bindtap="openSpot" data-id="{{item.id}}">
+          <image class="record-image" src="{{item.image}}" mode="aspectFill" />
+          <view class="service-title">{{item.name}}</view>
+          <view class="service-desc">{{item.summary}}</view>
+        </view>
+      </block>
+    </block>
+    <view class="card empty-card" wx:else>最近浏览记录会在你进入景点详情后自动生成。</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">我的报名</view>
+    <block wx:if="{{registeredActivities.length}}">
+      <block wx:for="{{registeredActivities}}" wx:key="id">
+        <view class="card record-card" bindtap="openActivity" data-id="{{item.id}}">
+          <image class="record-image" src="{{item.image}}" mode="aspectFill" />
+          <view class="service-title">{{item.title}}</view>
+          <view class="service-desc">{{item.date}} · {{item.place}}</view>
+        </view>
+      </block>
+    </block>
+    <view class="card empty-card" wx:else>活动报名记录会显示在这里，方便你快速回看。</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">出行提醒</view>
+    <block wx:for="{{reminders}}" wx:key="*this">
+      <view class="card reminder-card">{{item}}</view>
+    </block>
+  </view>
+</view>

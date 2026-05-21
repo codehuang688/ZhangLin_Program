@@ -1,0 +1,197 @@
+.hero {
+  background: linear-gradient(135deg, #f2ddc8, #f8f2e7);
+  overflow: hidden;
+}
+
+.hero-swiper {
+  height: 340rpx;
+}
+
+.hero-slide {
+  position: relative;
+  height: 340rpx;
+}
+
+.hero-image {
+  width: calc(100% + 56rpx);
+  height: 340rpx;
+  margin: -28rpx -28rpx 0;
+  display: block;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24rpx 28rpx 28rpx;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(37, 24, 18, 0.62));
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 245, 236, 0.2);
+  color: #fff6ef;
+  font-size: 22rpx;
+}
+
+.hero-panel {
+  padding-top: 22rpx;
+}
+
+.hero-brand {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #33241b;
+}
+
+.hero-title {
+  margin-top: 18rpx;
+  font-size: 42rpx;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero-desc {
+  margin-top: 18rpx;
+  line-height: 1.7;
+  color: rgba(255, 248, 242, 0.92);
+}
+
+.hero-copy {
+  margin-top: 16rpx;
+  color: #685b50;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  margin-top: 28rpx;
+}
+
+.stats {
+  margin-top: 20rpx;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #944326;
+}
+
+.stat-label {
+  margin-top: 12rpx;
+  color: #7a6b60;
+}
+
+.section {
+  margin-top: 30rpx;
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18rpx;
+  margin-top: 18rpx;
+}
+
+.feature-list,
+.tag-row {
+  margin-top: 18rpx;
+}
+
+.feature-card,
+.quick-card {
+  margin-top: 18rpx;
+}
+
+.feature-title,
+.spot-name,
+.route-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #382921;
+}
+
+.feature-desc,
+.spot-summary,
+.route-desc,
+.service-copy {
+  margin-top: 14rpx;
+  color: #6e6258;
+  line-height: 1.7;
+}
+
+.spot-card,
+.route-card,
+.activity-card {
+  margin-top: 18rpx;
+}
+
+.popular-scroll {
+  margin-top: 18rpx;
+  white-space: nowrap;
+}
+
+.popular-row {
+  display: inline-flex;
+  gap: 18rpx;
+}
+
+.popular-card {
+  width: 420rpx;
+}
+
+.popular-image {
+  width: calc(100% + 56rpx);
+  height: 220rpx;
+  margin: -28rpx -28rpx 22rpx;
+  display: block;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.popular-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #382921;
+}
+
+.popular-summary {
+  margin-top: 12rpx;
+  color: #6e6258;
+  line-height: 1.7;
+  white-space: normal;
+}
+
+.spot-image,
+.activity-image {
+  width: calc(100% + 56rpx);
+  height: 240rpx;
+  margin: -28rpx -28rpx 22rpx;
+  display: block;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.spot-duration,
+.route-meta,
+.activity-status {
+  font-size: 24rpx;
+  color: #9c6a4b;
+}
+
+.service-card {
+  margin: 30rpx 0 20rpx;
+}

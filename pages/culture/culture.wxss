@@ -1,0 +1,50 @@
+.intro-card {
+  background: linear-gradient(135deg, #e8efe7, #f7faf6);
+}
+
+.topic-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.topic-chip {
+  padding: 14rpx 24rpx;
+  border-radius: 999rpx;
+  background: #edf4ed;
+  color: #45614b;
+  font-size: 24rpx;
+}
+
+.topic-chip-active {
+  background: #466a4f;
+  color: #fff;
+}
+
+.topic-panel,
+.paragraph-card,
+.fact-card {
+  margin-top: 18rpx;
+}
+
+.topic-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #2b3b2e;
+}
+
+.topic-intro,
+.paragraph-card,
+.fact-card {
+  line-height: 1.8;
+  color: #5f6e62;
+}
+
+.topic-intro {
+  margin-top: 14rpx;
+}
+
+.section {
+  margin-top: 30rpx;
+}

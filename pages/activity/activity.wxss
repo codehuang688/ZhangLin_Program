@@ -1,0 +1,98 @@
+.hero-card,
+.activity-card,
+.service-card {
+  margin-top: 18rpx;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #efe0d2, #f9f5f0);
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.hero-image,
+.activity-image {
+  width: calc(100% + 56rpx);
+  display: block;
+  margin: -28rpx -28rpx 22rpx;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.hero-image {
+  height: 300rpx;
+}
+
+.activity-image {
+  height: 230rpx;
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.activity-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #35271f;
+}
+
+.activity-status {
+  font-size: 24rpx;
+  color: #a05732;
+}
+
+.activity-summary,
+.activity-meta,
+.service-copy {
+  margin-top: 14rpx;
+  line-height: 1.7;
+  color: #6d6156;
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.category-chip {
+  padding: 14rpx 24rpx;
+  border-radius: 999rpx;
+  background: #f3e6dc;
+  color: #8f5231;
+  font-size: 24rpx;
+}
+
+.category-chip-active {
+  background: #9c5230;
+  color: #fff;
+}
+
+.action-row {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.action-row-narrow {
+  margin-top: 18rpx;
+}
+
+.half-button {
+  flex: 1;
+}
+
+.ghost-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18rpx 26rpx;
+  border-radius: 999rpx;
+  background: #f3e8de;
+  color: #91492b;
+  font-size: 26rpx;
+}

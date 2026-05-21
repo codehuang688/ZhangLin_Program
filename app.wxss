@@ -1,0 +1,64 @@
+page {
+  background: #f5f3ef;
+  color: #2f2722;
+  font-size: 28rpx;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.card {
+  background: #fffdf9;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  box-sizing: border-box;
+  box-shadow: 0 10rpx 30rpx rgba(66, 42, 18, 0.06);
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #3b2b20;
+}
+
+.section-subtitle {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #7a6b60;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  margin-right: 12rpx;
+  margin-bottom: 12rpx;
+  font-size: 22rpx;
+  color: #8b4525;
+  background: #f8eadf;
+}
+
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18rpx 26rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #b85e36, #8f3b22);
+  color: #fff;
+  font-size: 26rpx;
+}
+
+.muted {
+  color: #7d7267;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20rpx;
+}
