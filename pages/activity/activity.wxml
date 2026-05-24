@@ -1,43 +1,95 @@
 <view class="page">
-  <view class="card hero-card">
-    <image class="hero-image" src="{{heroImage}}" mode="aspectFill" />
-    <view class="section-title">活动资讯</view>
-    <view class="section-subtitle">持续更新讲解专场、夜游体验、亲子研学与风物活动信息</view>
+  <view wx:if="{{loading}}" class="card hero-card">
+    <view class="skeleton-block" style="height:300rpx;"></view>
+    <view class="skeleton-block" style="height:40rpx;width:200rpx;margin-top:20rpx;"></view>
+    <view class="skeleton-block" style="height:22rpx;width:500rpx;margin-top:14rpx;"></view>
   </view>
 
-  <view class="category-list">
-    <block wx:for="{{categories}}" wx:key="*this">
-      <view class="category-chip {{activeCategory === item ? 'category-chip-active' : ''}}" bindtap="switchCategory" data-category="{{item}}">
-        {{item}}
-      </view>
-    </block>
+  <view wx:if="{{loading}}" class="chip-list">
+    <view class="skeleton-block" style="height:52rpx;width:100rpx;border-radius:999rpx;"></view>
+    <view class="skeleton-block" style="height:52rpx;width:100rpx;border-radius:999rpx;"></view>
+    <view class="skeleton-block" style="height:52rpx;width:120rpx;border-radius:999rpx;"></view>
+    <view class="skeleton-block" style="height:52rpx;width:100rpx;border-radius:999rpx;"></view>
   </view>
 
-  <block wx:for="{{activityNews}}" wx:key="id">
-    <view class="card activity-card">
-      <image class="activity-image" src="{{item.image}}" mode="aspectFill" bindtap="previewPoster" data-image="{{item.image}}" />
-      <view class="row-between">
-        <view class="activity-title">{{item.title}}</view>
-        <view class="activity-status">{{item.status}}</view>
-      </view>
-      <view class="activity-summary">{{item.summary}}</view>
-      <view class="activity-meta">{{item.date}} · {{item.place}}</view>
-      <view class="activity-meta">类别：{{item.category}} · 剩余名额：{{item.remaining}}</view>
-      <view class="action-row action-row-narrow">
-        <view class="ghost-button half-button">{{item.enrolled}} / {{item.capacity}} 已参与</view>
-        <view class="button-primary half-button" bindtap="register" data-id="{{item.id}}">
-          {{item.registered ? '已报名' : '立即报名'}}
+  <view wx:if="{{loading}}" class="card card-spacing">
+    <view class="skeleton-block" style="height:230rpx;"></view>
+    <view class="skeleton-block" style="height:32rpx;width:400rpx;margin-top:20rpx;"></view>
+    <view class="skeleton-block" style="height:22rpx;width:560rpx;margin-top:14rpx;"></view>
+    <view class="skeleton-block" style="height:20rpx;width:350rpx;margin-top:14rpx;"></view>
+    <view class="skeleton-block" style="height:20rpx;width:420rpx;margin-top:14rpx;"></view>
+    <view style="display:flex;gap:16rpx;margin-top:18rpx;">
+      <view class="skeleton-block" style="flex:1;height:56rpx;border-radius:999rpx;"></view>
+      <view class="skeleton-block" style="flex:1;height:56rpx;border-radius:999rpx;"></view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="card card-spacing">
+    <view class="skeleton-block" style="height:230rpx;"></view>
+    <view class="skeleton-block" style="height:32rpx;width:400rpx;margin-top:20rpx;"></view>
+    <view class="skeleton-block" style="height:22rpx;width:560rpx;margin-top:14rpx;"></view>
+    <view class="skeleton-block" style="height:20rpx;width:350rpx;margin-top:14rpx;"></view>
+    <view class="skeleton-block" style="height:20rpx;width:420rpx;margin-top:14rpx;"></view>
+    <view style="display:flex;gap:16rpx;margin-top:18rpx;">
+      <view class="skeleton-block" style="flex:1;height:56rpx;border-radius:999rpx;"></view>
+      <view class="skeleton-block" style="flex:1;height:56rpx;border-radius:999rpx;"></view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="card service-card">
+    <view class="skeleton-block" style="height:40rpx;width:200rpx;"></view>
+    <view class="skeleton-block" style="height:22rpx;width:560rpx;margin-top:14rpx;"></view>
+    <view class="skeleton-block" style="height:22rpx;width:480rpx;margin-top:8rpx;"></view>
+    <view style="display:flex;gap:16rpx;margin-top:24rpx;">
+      <view class="skeleton-block" style="flex:1;height:56rpx;border-radius:999rpx;"></view>
+      <view class="skeleton-block" style="flex:1;height:56rpx;border-radius:999rpx;"></view>
+    </view>
+  </view>
+
+  <block wx:if="{{!loading}}">
+    <view class="card hero-card">
+      <image class="hero-image card-img-top" src="{{heroImage}}" mode="aspectFill" lazy-load="{{true}}" bindtap="previewImage" data-src="{{heroImage}}" />
+      <view class="section-title">活动资讯</view>
+      <view class="section-subtitle">持续更新讲解专场、夜游体验、亲子研学与风物活动信息</view>
+    </view>
+
+    <view class="chip-list">
+      <block wx:for="{{categories}}" wx:key="*this">
+        <view class="category-chip {{activeCategory === item ? 'category-chip-active' : ''}}" bindtap="switchCategory" data-category="{{item}}">
+          {{item}}
         </view>
+      </block>
+    </view>
+
+    <block wx:if="{{activityNews.length}}">
+      <block wx:for="{{activityNews}}" wx:key="id">
+        <view class="card card-spacing">
+          <image class="activity-image card-img-top" src="{{item.image}}" mode="aspectFill" bindtap="previewPoster" data-image="{{item.image}}" lazy-load="{{true}}" />
+          <view class="row-between">
+            <view class="activity-title">{{item.title}}</view>
+            <view class="activity-status">{{item.status}}</view>
+          </view>
+          <view class="activity-summary">{{item.summary}}</view>
+          <view class="activity-meta">{{item.date}} · {{item.place}}</view>
+          <view class="activity-meta">类别：{{item.category}} · 剩余名额：{{item.remaining}}</view>
+          <view class="action-row action-row-narrow">
+            <view class="ghost-button half-button">{{item.enrolled}} / {{item.capacity}} 已参与</view>
+            <view class="button-primary half-button" bindtap="register" data-id="{{item.id}}">
+              {{item.registered ? '已报名' : '立即报名'}}
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+    <view class="card empty-card" wx:else>该分类暂未发布活动，请关注后续更新。</view>
+
+    <view class="card service-card">
+      <view class="section-title">参与建议</view>
+      <view class="service-copy">建议游客先在导览页规划路线，再根据时段选择活动；如需统一查看常用入口，可进入我的页面。</view>
+      <view class="action-row">
+        <view class="button-primary half-button" bindtap="openGuide">去看导览</view>
+        <view class="ghost-button half-button" bindtap="openProfile">进入我的</view>
       </view>
     </view>
   </block>
-
-  <view class="card service-card">
-    <view class="section-title">参与建议</view>
-    <view class="service-copy">建议游客先在导览页规划路线，再根据时段选择活动；如需统一查看常用入口，可进入我的页面。</view>
-    <view class="action-row">
-      <view class="button-primary half-button" bindtap="openGuide">去看导览</view>
-      <view class="ghost-button half-button" bindtap="openProfile">进入我的</view>
-    </view>
-  </view>
 </view>

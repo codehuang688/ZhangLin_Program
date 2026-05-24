@@ -1,50 +1,533 @@
-.intro-card {
-  background: linear-gradient(135deg, #e8efe7, #f7faf6);
+/* ===== 沉浸式Banner ===== */
+.hero-banner {
+  position: relative;
+  height: 480rpx;
+  overflow: hidden;
+  margin: -20rpx -24rpx 0;
 }
 
-.topic-list {
+.hero-bg {
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  display: block;
+}
+
+.hero-veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(15,30,20,0.55) 0%, rgba(25,45,30,0.7) 40%, rgba(35,55,38,0.85) 70%, rgba(45,60,45,0.92) 100%);
+}
+
+.hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hp {
+  position: absolute;
+  width: 4rpx;
+  height: 4rpx;
+  border-radius: 50%;
+  background: rgba(200, 180, 140, 0.7);
+}
+
+.hp1 { top: 20%; left: 20%; animation: particleFloat 4s ease-in infinite; }
+.hp2 { top: 50%; left: 70%; animation: particleFloat 5s ease-in 1s infinite; width: 6rpx; height: 6rpx; }
+.hp3 { top: 70%; left: 40%; animation: particleFloat 3.5s ease-in 2s infinite; }
+.hp4 { top: 35%; left: 85%; animation: particleFloat 4.5s ease-in 0.5s infinite; width: 8rpx; height: 8rpx; background: rgba(220, 200, 160, 0.6); }
+
+.hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 36rpx 44rpx;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6rpx 20rpx;
+  border-radius: 999rpx;
+  background: rgba(180, 160, 120, 0.15);
+  border: 1rpx solid rgba(200, 180, 140, 0.3);
+  color: rgba(220, 200, 160, 0.9);
+  font-size: 20rpx;
+  letter-spacing: 4rpx;
+  margin-bottom: 16rpx;
+}
+
+.hero-headline {
+  font-size: 52rpx;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.5);
+}
+
+.hero-tagline {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: rgba(210, 195, 165, 0.85);
+  font-weight: 300;
+  letter-spacing: 6rpx;
+}
+
+.hero-desc-text {
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  color: rgba(180, 170, 150, 0.6);
+  line-height: 1.6;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  30% { opacity: 0.8; }
+  70% { opacity: 0.8; }
+  100% { transform: translateY(-80rpx) translateX(20rpx); opacity: 0; }
+}
+
+/* ===== AI 文化助手 ===== */
+.ai-culture-card {
+  background: linear-gradient(135deg, rgba(42, 58, 44, 0.94), rgba(55, 72, 55, 0.9));
+  border: 1rpx solid rgba(160, 180, 150, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-culture-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(140, 180, 140, 0.08), transparent);
+  pointer-events: none;
+}
+
+.ai-culture-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.ai-culture-label {
+  font-size: 22rpx;
+  color: rgba(180, 200, 170, 0.85);
+  font-weight: 600;
+}
+
+.ai-culture-body {
+  font-size: 22rpx;
+  color: rgba(180, 190, 170, 0.6);
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+}
+
+.ai-culture-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 16rpx;
-  margin-top: 24rpx;
+  gap: 12rpx;
 }
 
-.topic-chip {
-  padding: 14rpx 24rpx;
+.ai-chip {
+  padding: 10rpx 18rpx;
   border-radius: 999rpx;
-  background: #edf4ed;
-  color: #45614b;
+  background: rgba(140, 180, 140, 0.12);
+  border: 1rpx solid rgba(160, 200, 150, 0.18);
+  color: rgba(190, 210, 185, 0.8);
+  font-size: 20rpx;
+}
+
+.ai-chip:active {
+  background: rgba(140, 200, 140, 0.22);
+}
+
+.ai-answer-card {
+  margin-top: 20rpx;
+  background: linear-gradient(135deg, rgba(50, 68, 50, 0.95), rgba(42, 58, 42, 0.93));
+  border: 1rpx solid rgba(140, 180, 140, 0.2);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+  margin-top: 0;
+}
+
+.ai-answer-card.show {
+  max-height: 600rpx;
+  opacity: 1;
+  padding: 24rpx;
+  margin-top: 20rpx;
+}
+
+.ai-answer-header {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.ai-answer-icon { font-size: 26rpx; }
+
+.ai-answer-label {
+  font-size: 22rpx;
+  color: rgba(180, 200, 170, 0.85);
+  font-weight: 600;
+  flex: 1;
+}
+
+.ai-answer-close {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  background: rgba(160, 190, 150, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  color: rgba(180, 200, 170, 0.7);
+}
+
+.ai-answer-q {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  font-weight: 700;
+  color: rgba(220, 235, 210, 0.9);
+}
+
+.ai-answer-divider {
+  height: 1rpx;
+  background: rgba(160, 190, 150, 0.15);
+  margin: 14rpx 0;
+}
+
+.ai-answer-a {
   font-size: 24rpx;
+  color: rgba(200, 215, 195, 0.75);
+  line-height: 1.8;
 }
 
-.topic-chip-active {
-  background: #466a4f;
+/* ===== 文化专题 ===== */
+.topic-tabs-scroll { margin-top: 24rpx; white-space: nowrap; }
+.topic-tabs-wrap { display: inline-flex; gap: 14rpx; padding: 0 4rpx; }
+
+.topic-tab {
+  padding: 14rpx 26rpx;
+  border-radius: 999rpx;
+  background: #edf3ec;
+  color: #4a6b50;
+  font-size: 24rpx;
+  white-space: nowrap;
+}
+
+.topic-tab.active {
+  background: linear-gradient(135deg, #3a5a40, #4a7045);
   color: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(58, 90, 64, 0.25);
 }
 
-.topic-panel,
-.paragraph-card,
-.fact-card {
-  margin-top: 18rpx;
+.topic-hero-card {
+  margin-top: 24rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  background: #fff;
 }
 
-.topic-title {
-  font-size: 34rpx;
+.topic-hero-img {
+  width: 100%;
+  height: 260rpx;
+  display: block;
+}
+
+.topic-hero-body {
+  padding: 28rpx;
+}
+
+.topic-hero-title {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #2b3b2e;
+}
+
+.topic-hero-intro {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #5a6e5e;
+  line-height: 1.7;
+}
+
+.section-card {
+  display: flex;
+  gap: 18rpx;
+  align-items: flex-start;
+  margin-top: 16rpx;
+  background: rgba(248, 252, 247, 0.9);
+}
+
+.section-num {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 8rpx;
+  background: #e5efe2;
+  color: #3a5a40;
+  font-size: 20rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-text {
+  flex: 1;
+  font-size: 24rpx;
+  color: #4a5e4e;
+  line-height: 1.9;
+}
+
+.facts-card {
+  margin-top: 20rpx;
+  background: linear-gradient(135deg, #f4f8f2, #fafdf8);
+  border: 1rpx solid rgba(120, 160, 120, 0.1);
+}
+
+.facts-label {
+  font-size: 20rpx;
+  color: #6a8a6a;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+  letter-spacing: 2rpx;
+}
+
+.fact-item {
+  padding: 10rpx 0;
+  font-size: 22rpx;
+  color: #5a705e;
+  border-top: 1rpx solid rgba(140, 180, 140, 0.12);
+}
+
+.fact-item:first-child { border-top: none; }
+
+/* ===== 文化年轮 ===== */
+.culture-timeline-scroll {
+  margin-top: 24rpx;
+  white-space: nowrap;
+}
+
+.culture-timeline-track {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 12rpx 4rpx 20rpx;
+}
+
+.timeline-node {
+  width: 220rpx;
+  flex-shrink: 0;
+  padding: 24rpx 20rpx;
+  border-radius: 16rpx;
+  background: linear-gradient(180deg, #fff, #f6faf4);
+  border: 1rpx solid rgba(120, 160, 120, 0.12);
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.timeline-node-year {
+  font-size: 26rpx;
+  font-weight: 800;
+  color: #3a5a40;
+}
+
+.timeline-node-title {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  font-weight: 700;
+  color: #3a4a3a;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.timeline-node-desc {
+  margin-top: 8rpx;
+  font-size: 20rpx;
+  color: #6a7a6a;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+.timeline-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40rpx;
+  flex-shrink: 0;
+  gap: 6rpx;
+  padding-top: 40rpx;
+}
+
+.connector-line {
+  width: 20rpx;
+  height: 2rpx;
+  background: rgba(140, 180, 140, 0.4);
+}
+
+.connector-arrow {
+  font-size: 24rpx;
+  color: rgba(140, 180, 140, 0.5);
+}
+
+/* ===== 华侨故事 ===== */
+.story-card {
+  display: flex;
+  gap: 20rpx;
+  align-items: flex-start;
+  margin-top: 16rpx;
+  background: linear-gradient(135deg, #fbfdf9, #fff);
+  border: 1rpx solid rgba(140, 170, 130, 0.1);
+}
+
+.story-icon-wrap {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eaf3e5, #dcecd6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.story-icon {
+  font-size: 32rpx;
+}
+
+.story-body { flex: 1; }
+
+.story-title {
+  font-size: 28rpx;
   font-weight: 700;
   color: #2b3b2e;
 }
 
-.topic-intro,
-.paragraph-card,
-.fact-card {
-  line-height: 1.8;
-  color: #5f6e62;
+.story-subtitle {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #6a8a6a;
 }
 
-.topic-intro {
-  margin-top: 14rpx;
+.story-desc {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #5a6e5e;
+  line-height: 1.7;
 }
 
-.section {
-  margin-top: 30rpx;
+/* ===== 非遗传承 ===== */
+.heritage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.heritage-card {
+  border-radius: 16rpx;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.heritage-img {
+  width: 100%;
+  height: 180rpx;
+  display: block;
+}
+
+.heritage-badge {
+  padding: 14rpx 16rpx 0;
+  font-size: 22rpx;
+  font-weight: 700;
+  color: #3a5a40;
+}
+
+.heritage-desc {
+  padding: 8rpx 16rpx 18rpx;
+  font-size: 20rpx;
+  color: #6a7a68;
+  line-height: 1.5;
+}
+
+/* ===== 数字展馆 ===== */
+.exhibition-scroll {
+  margin-top: 24rpx;
+  white-space: nowrap;
+}
+
+.exhibition-track {
+  display: inline-flex;
+  gap: 18rpx;
+  padding: 4rpx 4rpx 16rpx;
+}
+
+.exhibition-card {
+  width: 260rpx;
+  flex-shrink: 0;
+  border-radius: 16rpx;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.exhibition-img {
+  width: 100%;
+  height: 200rpx;
+  display: block;
+}
+
+.exhibition-label {
+  padding: 10rpx 14rpx 0;
+  font-size: 18rpx;
+  color: #8aaa8a;
+}
+
+.exhibition-title {
+  padding: 4rpx 14rpx 16rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #2b3b2e;
+}
+
+/* ===== 页脚 ===== */
+.page-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  padding: 40rpx 0 calc(160rpx + env(safe-area-inset-bottom));
+}
+
+.footer-line {
+  width: 40rpx;
+  height: 1rpx;
+  background: rgba(140, 170, 140, 0.3);
+}
+
+.footer-text {
+  font-size: 20rpx;
+  color: rgba(140, 170, 140, 0.5);
+  letter-spacing: 4rpx;
 }

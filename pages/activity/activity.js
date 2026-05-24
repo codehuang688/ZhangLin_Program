@@ -1,7 +1,8 @@
 const { activityNews } = require('../../data/site');
 const {
   isRegisteredActivity,
-  registerActivity
+  registerActivity,
+  unregisterActivity
 } = require('../../utils/storage');
 
 const categories = ['全部'].concat(
@@ -14,7 +15,12 @@ const categories = ['全部'].concat(
 );
 
 Page({
+  onShareAppMessage() {
+    return { title: '樟林古港 — 活动资讯：讲解专场、夜游体验、亲子研学持续更新', path: '/pages/activity/activity' };
+  },
+
   data: {
+    loading: true,
     heroImage: '/assets/images/temple.jpg',
     categories,
     activeCategory: '全部',
@@ -23,6 +29,12 @@ Page({
 
   onShow() {
     this.refreshActivities();
+  },
+
+  onPullDownRefresh() {
+    this.refreshActivities();
+    wx.showToast({ title: '已刷新', icon: 'success', duration: 1000 });
+    setTimeout(() => wx.stopPullDownRefresh(), 1200);
   },
 
   refreshActivities(category = this.data.activeCategory) {
@@ -40,13 +52,42 @@ Page({
       activeCategory: category,
       activityNews: formatted
     });
+    setTimeout(() => this.setData({ loading: false }), 500);
   },
 
   previewPoster(event) {
     const { image } = event.currentTarget.dataset;
-    wx.previewImage({
-      current: image,
-      urls: [image]
+    const fs = wx.getFileSystemManager();
+    fs.readFile({
+      filePath: image,
+      success: (res) => {
+        const tempPath = `${wx.env.USER_DATA_PATH}/poster_${Date.now()}.jpg`;
+        fs.writeFile({
+          filePath: tempPath,
+          data: res.data,
+          success: () => {
+            wx.previewImage({ current: tempPath, urls: [tempPath] });
+          }
+        });
+      }
+    });
+  },
+
+  previewImage(event) {
+    const { src } = event.currentTarget.dataset;
+    const fs = wx.getFileSystemManager();
+    fs.readFile({
+      filePath: src,
+      success: (res) => {
+        const tempPath = `${wx.env.USER_DATA_PATH}/preview_${Date.now()}.jpg`;
+        fs.writeFile({
+          filePath: tempPath,
+          data: res.data,
+          success: () => {
+            wx.previewImage({ current: tempPath, urls: [tempPath] });
+          }
+        });
+      }
     });
   },
 
@@ -58,6 +99,13 @@ Page({
   register(event) {
     const { id } = event.currentTarget.dataset;
     const activity = activityNews.find((item) => item.id === id);
+    const alreadyReg = isRegisteredActivity(id);
+    if (alreadyReg) {
+      unregisterActivity(id);
+      wx.showToast({ title: '已取消报名', icon: 'none' });
+      this.refreshActivities();
+      return;
+    }
     const result = registerActivity(activity);
     wx.showToast({
       title: result.registered ? '你已报名该活动' : '报名成功',

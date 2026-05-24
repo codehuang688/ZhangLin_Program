@@ -7,6 +7,7 @@ const {
 
 Page({
   data: {
+    loading: true,
     scenicSpot: null,
     gallery: [],
     isFavorite: false,
@@ -28,9 +29,17 @@ Page({
       durationText: scenicSpot.audioMeta ? scenicSpot.audioMeta.duration : '00:00',
       audioMode: scenicSpot.audioUrl ? 'audio' : 'script'
     });
-    wx.setNavigationBarTitle({
-      title: scenicSpot.name
-    });
+    wx.setNavigationBarTitle({ title: scenicSpot.name });
+    setTimeout(() => this.setData({ loading: false }), 500);
+  },
+
+  onShareAppMessage() {
+    const name = this.data.scenicSpot ? this.data.scenicSpot.name : '樟林古港景点';
+    const id = this.data.scenicSpot ? this.data.scenicSpot.id : '';
+    return {
+      title: `樟林古港 — ${name}`,
+      path: `/pages/scenic-detail/scenic-detail?id=${id}`
+    };
   },
 
   onUnload() {
@@ -67,6 +76,11 @@ Page({
       this.setData({ isAudioPlaying: false });
     });
     context.onTimeUpdate(() => {
+      const now = Date.now();
+      if (this.lastAudioUpdate && now - this.lastAudioUpdate < 250) {
+        return;
+      }
+      this.lastAudioUpdate = now;
       const duration = Math.max(1, Math.floor(context.duration || 0));
       const current = Math.floor(context.currentTime || 0);
       this.setData({
@@ -193,9 +207,30 @@ Page({
     const current = event && event.currentTarget && event.currentTarget.dataset.current
       ? event.currentTarget.dataset.current
       : this.data.scenicSpot.image;
-    wx.previewImage({
-      current,
-      urls: this.data.gallery
+    const urls = this.data.gallery;
+
+    const fs = wx.getFileSystemManager();
+    let converted = 0;
+    const tempUrls = [];
+    urls.forEach((url, index) => {
+      fs.readFile({
+        filePath: url,
+        success: (res) => {
+          const tempPath = `${wx.env.USER_DATA_PATH}/gallery_${index}_${Date.now()}.jpg`;
+          fs.writeFile({
+            filePath: tempPath,
+            data: res.data,
+            success: () => {
+              tempUrls[index] = tempPath;
+              converted++;
+              if (converted === urls.length) {
+                const currentIndex = Math.max(0, urls.indexOf(current));
+                wx.previewImage({ current: tempUrls[currentIndex], urls: tempUrls });
+              }
+            }
+          });
+        }
+      });
     });
   }
 });

@@ -1,0 +1,32 @@
+<template name="spot-card">
+  <image class="card-img-top" src="{{spot.image}}" mode="aspectFill" lazy-load="{{true}}" catchtap="previewImage" data-src="{{spot.image}}" />
+  <view class="row-between">
+    <view class="spot-name">{{spot.name}}</view>
+    <view class="spot-duration">{{spot.duration}}</view>
+  </view>
+  <view class="spot-summary">{{spot.summary}}</view>
+  <view class="tag-row">
+    <block wx:for="{{spot.tagList}}" wx:key="text">
+      <text class="tag {{item.cssClass}}">{{item.text}}</text>
+    </block>
+  </view>
+</template>
+
+<template name="route-card">
+  <view class="row-between">
+    <view class="route-name">{{route.name}}</view>
+    <view class="route-meta">{{route.duration}}</view>
+  </view>
+  <view class="route-desc">{{route.description}}</view>
+  <view class="muted">适合人群：{{route.suitable}}</view>
+</template>
+
+<template name="activity-card">
+  <image class="card-img-top" src="{{activity.image}}" mode="aspectFill" lazy-load="{{true}}" catchtap="previewImage" data-src="{{activity.image}}" />
+  <view class="row-between">
+    <view class="route-name">{{activity.title}}</view>
+    <view class="activity-status">{{activity.status}}</view>
+  </view>
+  <view class="route-desc">{{activity.summary}}</view>
+  <view class="muted">{{activity.date}} · {{activity.place}}</view>
+</template>

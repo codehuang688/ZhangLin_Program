@@ -89,6 +89,56 @@ const scenicSpots = [
   }
 ];
 
+const userBadges = [
+  { id: 'explorer', name: '红头船探索者', icon: '🚢', desc: '浏览3个以上景点', cond: 'spots >= 3', level: 1 },
+  { id: 'photographer', name: '古港摄影师', icon: '📸', desc: '收藏2个以上景点', cond: 'favs >= 2', level: 1 },
+  { id: 'taste', name: '潮味体验官', icon: '🍵', desc: '报名1场以上活动', cond: 'acts >= 1', level: 1 },
+  { id: 'scholar', name: '海丝文化学者', icon: '📖', desc: '浏览全部4个景点', cond: 'spots >= 4', level: 2 },
+  { id: 'traveler', name: '侨乡行者', icon: '🌍', desc: '景点+活动+收藏全部达成', cond: 'spots >= 4 && acts >= 1 && favs >= 2', level: 3 }
+];
+
+const journeyTips = [
+  { icon: '🏛️', title: '核心景点', desc: '红头船展示点、古港遗址、侨乡建筑群、侨史长廊' },
+  { icon: '🚶', title: '推荐路线', desc: '古港半日轻游 · 人文深度一日游 · 亲子研学体验' },
+  { icon: '🎯', title: '近期活动', desc: '周末讲解专场、古街夜游、亲子研学打卡任务' }
+];
+
+const profileAiTips = [
+  { scene: 'less', icon: '🗺️', text: '你刚开始探索樟林古港，推荐从红头船文化展示点开始，建立整体认知后再深入各专题。' },
+  { scene: 'half', icon: '📸', text: '你已经探索了部分景点，补充侨乡建筑群和侨史长廊可以让你的文化拼图更完整。' },
+  { scene: 'full', icon: '🎉', text: '文化探索度很高！现在是体验潮汕工夫茶和古港小吃的最佳时机，给旅程加点烟火气。' }
+];
+
+const heritageItems = [
+  { id: 'yingge', name: '英歌舞', icon: '💃', desc: '潮汕传统民间舞蹈，以刚劲有力的集体舞蹈展现英雄气概，常在节庆与重大活动中表演。', image: '/assets/images/ancient-pier.jpg' },
+  { id: 'chaozhou-opera', name: '潮剧', icon: '🎭', desc: '以潮汕方言演唱的传统戏曲，唱腔婉转、做工细腻，是国家级非物质文化遗产。', image: '/assets/images/nanshengli-aerial.jpg' },
+  { id: 'gongfu-tea', name: '工夫茶艺', icon: '🍵', desc: '潮汕工夫茶以"讲究"著称，从选茶、冲水到品饮皆有章法，体现地方待客之道和生活美学。', image: '/assets/images/temple.jpg' },
+  { id: 'woodcarving', name: '潮汕木雕', icon: '🪵', desc: '以精湛的透雕、浮雕技法闻名，常见于庙宇、祠堂与古宅装饰，是建筑文化的重要组成。', image: '/assets/images/old-building.jpg' }
+];
+
+const overseasStories = [
+  { title: '下南洋潮', subtitle: '清代潮人出海潮', desc: '清代中后期，大量潮汕人从樟林古港出发，乘红头船远赴东南亚谋生，形成规模空前的"下南洋"移民潮。', icon: '⛵' },
+  { title: '侨批家书', subtitle: '跨越海洋的情感纽带', desc: '侨批是华侨寄回家乡的信件与汇款凭证，一纸家书承载着跨越海洋的牵挂与责任，是侨乡社会的情感基石。', icon: '✉️' },
+  { title: '侨汇与建设', subtitle: '反哺家乡的力量', desc: '华侨汇款不仅支撑了家乡亲人的生活，更推动了学校、医院、道路等公共设施的建设，深刻改变了地方面貌。', icon: '🏠' },
+  { title: '南洋归来', subtitle: '文化交融的见证', desc: '许多华侨归国后在樟林兴建中西合璧的建筑，将南洋的生活方式和审美带回故土，形成独特的侨乡风貌。', icon: '🏛️' }
+];
+
+const exhibitionItems = [
+  { title: '古港老地图', image: '/assets/images/guide-map.jpg', label: '清代古港舆图' },
+  { title: '红头船模型', image: '/assets/images/red-ship.jpg', label: '广式红头船复原' },
+  { title: '侨批原件', image: '/assets/images/culture-corridor.jpg', label: '华侨家书档案' },
+  { title: '古港遗址航拍', image: '/assets/images/nanshengli-aerial.jpg', label: '今日古港全貌' },
+  { title: '古建筑木雕', image: '/assets/images/old-building.jpg', label: '潮汕木雕工艺' },
+  { title: '码头石阶', image: '/assets/images/ancient-pier.jpg', label: '古港码头遗存' }
+];
+
+const cultureAiQA = [
+  { q: '红头船为什么叫红头船', a: '红头船因船头饰以朱红色而得名，是清代潮汕地区特有的远洋帆船。红色既便于海上辨识，也承载了趋吉避凶的民间信仰。樟林古港是红头船的主要始发港之一，见证了潮汕海贸的繁荣。' },
+  { q: '侨批是什么', a: '侨批是海外华侨寄回家乡的信件与汇款凭证的合称。"批"即信件，侨批既是家书也是汇款单，记录了华侨在海外的奋斗和对家乡的牵挂，是研究侨乡历史的一手资料。' },
+  { q: '古港建筑有什么特色', a: '樟林古港建筑融合了潮汕传统与南洋风格：屋脊灰塑精美、门楼装饰繁复、窗棂雕花细腻，部分建筑可见中西合璧的设计，体现了海贸交流带来的审美融合。' },
+  { q: '什么是海丝文化', a: '海上丝绸之路是中国古代对外贸易与文化交流的重要通道。樟林古港作为粤东重要港口，是海丝网络中的关键节点，红头船往来于东南亚各埠，带动了商品、文化和人口的跨海流动。' }
+];
+
 const routePlans = [
   {
     id: 'half-day',
@@ -102,7 +152,9 @@ const routePlans = [
       { time: '10:30', title: '古港遗址游览区', detail: '沿步行线体验古港空间格局。' },
       { time: '11:20', title: '侨乡古建筑群', detail: '慢游古街并拍照记录建筑细节。' },
       { time: '12:00', title: '特色风物补给', detail: '前往风物页推荐点选择茶饮和伴手礼。' }
-    ]
+    ],
+    transport: '步行',
+    difficulty: '轻松'
   },
   {
     id: 'one-day',
@@ -118,7 +170,9 @@ const routePlans = [
       { time: '14:00', title: '古港遗址游览区', detail: '下午时段适合慢节奏步行观察。' },
       { time: '15:00', title: '侨乡古建筑群', detail: '通过建筑装饰细节感受时代变化。' },
       { time: '16:10', title: '文化科普专题回看', detail: '在小程序内继续查看专题内容与知识点。' }
-    ]
+    ],
+    transport: '步行',
+    difficulty: '中等'
   },
   {
     id: 'family-study',
@@ -132,14 +186,71 @@ const routePlans = [
       { time: '11:00', title: '侨史记忆长廊', detail: '从家书故事理解“家”和“远方”的关系。' },
       { time: '12:00', title: '本土风物体验', detail: '结合地方饮食与手作内容建立生活感受。' },
       { time: '14:00', title: '古建筑观察任务', detail: '寻找屋脊、门楼、装饰纹样等建筑元素。' }
-    ]
+    ],
+    transport: '步行',
+    difficulty: '轻松'
+  },
+  {
+    id: 'night-photo',
+    name: '古港夜游光影线',
+    duration: '约3小时',
+    suitable: '摄影爱好者、夜游体验者',
+    description: '以黄昏至夜晚时段为线索，串联建筑灯光、街巷夜景与夜间文化氛围。',
+    stops: [
+      { time: '17:30', title: '古港遗址日落观景', detail: '黄昏光线下的古港轮廓与水面倒影，适合航拍摄影。' },
+      { time: '18:20', title: '侨乡建筑灯光漫步', detail: '建筑灯影与街巷氛围，感受古港夜间静谧美感。' },
+      { time: '19:10', title: '古街夜色体验', detail: '步行古街夜市区段，体验夜间在地生活气息。' },
+      { time: '20:00', title: '夜间茶叙收尾', detail: '在古港周边茶空间结束夜游，搭配地方风味小点。' }
+    ],
+    transport: '步行',
+    difficulty: '轻松'
+  },
+  {
+    id: 'photo-spots',
+    name: '人文摄影打卡线',
+    duration: '约5小时',
+    suitable: '摄影爱好者、内容创作者',
+    description: '精选古港最具画面感的拍摄点位，涵盖建筑细节、街巷纵深与自然光影。',
+    stops: [
+      { time: '08:00', title: '晨光古港遗址', detail: '清晨低角度阳光穿过遗址区，光影层次丰富，适合人文纪实拍摄。' },
+      { time: '09:30', title: '侨乡古建筑群特写', detail: '聚焦门楼灰塑、屋脊装饰和窗格纹样，注重细节构图。' },
+      { time: '11:00', title: '古街纵深构图', detail: '街巷透视与生活场景结合，捕捉在地人文氛围。' },
+      { time: '14:30', title: '红头船展示点全景', detail: '下午光线适合拍摄红头船整体造型与水域倒影。' },
+      { time: '16:00', title: '夕照侨史长廊', detail: '金色斜阳穿过长廊形成光影韵律，适合收尾大片。' }
+    ],
+    transport: '步行',
+    difficulty: '中等'
+  },
+  {
+    id: 'food-trail',
+    name: '在地风味寻访线',
+    duration: '约4小时',
+    suitable: '美食爱好者、休闲游客',
+    description: '以工夫茶、潮式点心和地方小吃为线索，把味觉体验融入古港慢游。',
+    stops: [
+      { time: '10:00', title: '古港早茶体验', detail: '在古港周边茶楼体验潮式早茶，搭配经典点心。' },
+      { time: '11:30', title: '侨乡小吃探索', detail: '沿古街寻找地方小吃摊点，品尝蚝烙、粿条等在地风味。' },
+      { time: '14:00', title: '工夫茶艺体验', detail: '进入茶空间学习工夫茶冲泡流程，感受潮汕待客之道。' },
+      { time: '15:30', title: '伴手礼选购', detail: '挑选红头船主题茶配礼盒与地方特产带回家。' }
+    ],
+    transport: '步行',
+    difficulty: '轻松'
   }
+];
+const nearbyServices = [
+  { icon: '🚻', name: '公共卫生间', dist: '游客中心旁' },
+  { icon: '🅿️', name: '停车场', dist: '入口东侧 200m' },
+  { icon: '🍵', name: '茶饮补给', dist: '古街沿线' },
+  { icon: '📍', name: '游客服务中心', dist: '古港入口处' },
+  { icon: '🛒', name: '伴手礼商店', dist: '步行街中段' },
+  { icon: '📶', name: '免费Wi-Fi', dist: '景区全覆盖' }
 ];
 
 const cultureTopics = [
   {
     id: 'ship',
     title: '红头船与海贸记忆',
+    image: '/assets/images/red-ship.jpg',
     intro: '红头船是樟林古港最具代表性的文化符号之一，也是理解地方海贸史的入口。',
     sections: [
       '红头船名称醒目、辨识度高，常被视作潮汕商贸精神与海洋文化的重要象征。',
@@ -151,6 +262,7 @@ const cultureTopics = [
   {
     id: 'hometown',
     title: '侨乡历史文脉',
+    image: '/assets/images/culture-corridor.jpg',
     intro: '侨乡文化关乎人与地方的双向联结，既体现在出洋故事中，也保留在家书、建筑和生活方式里。',
     sections: [
       '樟林古港的兴起与海上贸易密切相关，许多家庭的命运也因此与海外世界发生连接。',
@@ -161,7 +273,8 @@ const cultureTopics = [
   },
   {
     id: 'architecture',
-    title: '古港建筑与街巷风貌',
+    title: '古建筑与街巷风貌',
+    image: '/assets/images/old-building.jpg',
     intro: '街区风貌和古建筑细节保存了地方营造技艺，也反映出侨乡社会开放包容的文化气质。',
     sections: [
       '潮汕传统建筑讲究空间礼序、装饰寓意和工艺细节，是地方文化最直观的物质载体。',
@@ -177,41 +290,81 @@ const specialtyItems = [
     id: 'tea',
     name: '潮汕工夫茶体验',
     category: '在地风味',
+    image: '/assets/images/temple.jpg',
     description: '以泡茶、闻香、品饮为核心的地方待客方式，适合作为慢游中的休憩体验。',
     recommend: '下午时段体验更放松',
-    tags: ['茶文化', '社交体验', '轻休闲']
+    story: '潮汕工夫茶讲究"和、敬、精、乐"，从选水、温壶到高冲低斟，每一个步骤都蕴含着对客人的尊重和对生活的讲究。樟林古港作为侨乡，工夫茶更是连接海内外潮人的文化纽带。',
+    tags: ['茶文化', '社交体验', '轻休闲'],
+    bestTime: '14:00-17:00',
+    crowdLevel: '适中'
   },
   {
     id: 'pastry',
     name: '潮式点心与古港茶配',
     category: '在地风味',
+    image: '/assets/images/nanshengli-aerial.jpg',
     description: '结合地方点心与茶饮补给，适合短时游览中的能量补充和伴手礼挑选。',
     recommend: '适合半日游收尾补给',
-    tags: ['伴手礼', '美食推荐', '游客补给']
+    story: '樟林人离不开茶配。从酥糖、豆条到芋泥糕，每一味茶配都承载着潮汕糕点匠人的手作温度。古港人常说"无茶配不成茶"，点心与工夫茶共同构成了樟林人日常生活的滋味底色。',
+    tags: ['伴手礼', '美食推荐', '游客补给'],
+    bestTime: '全天',
+    crowdLevel: '热门'
   },
   {
     id: 'craft',
     name: '侨乡手作与文创',
     category: '文创纪念',
+    image: '/assets/images/red-ship.jpg',
     description: '提炼红头船、古港建筑和侨乡故事元素，形成更适合游客带走的文化纪念品。',
     recommend: '适合亲子游客选购纪念',
-    tags: ['文创', '红头船元素', '纪念收藏']
+    story: '红头船木雕模型、古港建筑明信片、侨批主题书签……每一件文创背后都有一段樟林故事。手作匠人们将海丝记忆与潮汕工艺融合，让游客把古港文化"带回家"。',
+    tags: ['文创', '红头船元素', '纪念收藏'],
+    bestTime: '全天',
+    crowdLevel: '热门'
   },
   {
     id: 'life',
     name: '潮汕生活风物观察',
     category: '民俗体验',
+    image: '/assets/images/old-building.jpg',
     description: '从饮食、器物和街区日常切入，帮助游客理解樟林古港的生活质感与地方气息。',
     recommend: '建议结合街区步行慢慢体验',
-    tags: ['生活方式', '民俗观察', '街巷体验']
+    story: '走进樟林古街，你会发现生活的细节无处不在：门口晾晒的鱼干、沿街飘来的卤味香、老铺子里叮叮当当的修壶声……这些看似平凡的日常，却是最真实的樟林生活图景。',
+    tags: ['生活方式', '民俗观察', '街巷体验'],
+    bestTime: '全天',
+    crowdLevel: '适中'
+  },
+  {
+    id: 'oyster-omelet',
+    name: '蚝烙与古港小吃',
+    category: '在地风味',
+    image: '/assets/images/ancient-pier.jpg',
+    description: '以蚝烙为代表的潮汕街头小吃，外酥内嫩，搭配鱼露蘸食，是古港最地道的美食记忆。',
+    recommend: '午餐或下午茶时段最佳',
+    story: '蚝烙是潮汕美食的一张名片。古港附近的蚝烙店多由三代传承，新鲜蚝仔裹上番薯粉浆，在平底锅中煎至金黄，外皮酥脆、内馅鲜嫩，搭配一杯工夫茶，便是最地道的樟林味道。',
+    tags: ['街头美食', '必吃推荐', '地方特色'],
+    bestTime: '11:00-15:00',
+    crowdLevel: '热门'
+  },
+  {
+    id: 'woodcraft',
+    name: '潮汕木雕工艺',
+    category: '文创纪念',
+    image: '/assets/images/culture-corridor.jpg',
+    description: '国家级非遗技艺，以多层透雕和浮雕著称，常见于庙宇斗拱与古宅花窗的装饰细节中。',
+    recommend: '文化爱好者必看，可选购小型木雕摆件',
+    story: '潮汕木雕与东阳木雕、福建木雕并称中国三大木雕流派。樟林古港的古建筑中随处可见木雕精品，花鸟虫鱼、戏曲人物、吉祥纹样被匠人一刀刀赋予了生命。如今，小尺寸的木雕摆件已成为最受欢迎的文旅伴手礼之一。',
+    tags: ['非遗工艺', '收藏鉴赏', '文化传承'],
+    bestTime: '全天',
+    crowdLevel: '适中'
   }
 ];
 
 const homeStats = [
-  { label: '推荐景点', value: '4+' },
-  { label: '主题线路', value: '3' },
-  { label: '文化专题', value: '3' },
-  { label: '风物推荐', value: '4' }
+  { label: '推荐景点', value: '4+', target: 'featured-section' },
+  { label: '主题线路', value: '3', target: 'route-section' },
+  { label: '文化专题', value: '3', target: '/pages/culture/culture' },
+  { label: '风物推荐', value: '4', target: '/pages/specialty/specialty' }
 ];
 
 const homeBanners = [
@@ -329,6 +482,29 @@ const profileServices = [
   }
 ];
 
+const cultureTimeline = [
+  { year: '明朝', event: '开港通商', detail: '樟林港兴起为闽粤重要港口' },
+  { year: '清初', event: '海禁迁界', detail: '沿海居民内迁，港口一度衰落' },
+  { year: '康熙', event: '复界复兴', detail: '取消海禁，红头船贸易兴起' },
+  { year: '雍正', event: '鼎盛时期', detail: '樟林成为粤东第一大港' },
+  { year: '近代', event: '侨乡形成', detail: '大批潮汕人下南洋谋生' },
+  { year: '当代', event: '文旅复兴', detail: '古港遗址保护与文旅开发' },
+  { year: '未来', event: '数字文旅', detail: 'AI导览 · 智慧服务 · 文化传承' }
+];
+
+const todayData = [
+  { label: '可游览景点', value: '10+', sub: '含古港遗址与建筑群' },
+  { label: '推荐路线', value: '3条', sub: '半日/全日/亲子研学' },
+  { label: '文化专题', value: '3组', sub: '红头船·侨乡·建筑' },
+  { label: '近期活动', value: '4场', sub: '讲解专场·夜游体验' }
+];
+
+const newHomeBanners = [
+  { id: '1', image: '/assets/images/red-ship.jpg', title: '千年古港', subtitle: '海丝文化 · 红头船传奇', desc: '探索樟林古港红头船文化与侨乡历史', action: 'detail', target: 'ship-museum' },
+  { id: '2', image: '/assets/images/ancient-pier.jpg', title: '古港遗址', subtitle: '明清海丝 · 重要节点', desc: '漫步古港遗址，感受千年商贸繁华', action: 'detail', target: 'port-ruins' },
+  { id: '3', image: '/assets/images/old-building.jpg', title: '侨乡建筑', subtitle: '中西合璧 · 建筑瑰宝', desc: '领略侨乡古建筑的独特美学魅力', action: 'detail', target: 'historic-arcade' }
+];
+
 module.exports = {
   scenicSpots,
   routePlans,
@@ -338,5 +514,16 @@ module.exports = {
   homeBanners,
   activityNews,
   profileStats,
-  profileServices
+  profileServices,
+  cultureTimeline,
+  todayData,
+  newHomeBanners,
+  nearbyServices,
+  heritageItems,
+  overseasStories,
+  exhibitionItems,
+  cultureAiQA,
+  userBadges,
+  journeyTips,
+  profileAiTips
 };

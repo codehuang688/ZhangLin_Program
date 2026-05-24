@@ -1,34 +1,118 @@
 <view class="page">
-  <view class="card intro-card">
-    <view class="section-title">本土特色风物</view>
-    <view class="section-subtitle">把游客的“看景”延伸到“尝味、选礼、感受地方生活”</view>
+  <view class="hero-banner" style="transform: translateY({{bannerOffset}}rpx)">
+    <image class="hero-bg" src="/assets/images/nanshengli-aerial.jpg" mode="aspectFill" />
+    <view class="hero-veil"></view>
+    <view class="hero-steam">
+      <view class="steam s1"></view>
+      <view class="steam s2"></view>
+      <view class="steam s3"></view>
+    </view>
+    <view class="hero-content">
+      <view class="hero-badge">见人间烟火 · 品古港风物</view>
+      <view class="hero-headline">潮味 · 侨韵</view>
+      <view class="hero-tagline">古港生活方式</view>
+      <view class="hero-desc-text">工夫茶的香气、蚝烙的滋滋声、木雕的刀锋——这些才是樟林最真实的样子</view>
+    </view>
   </view>
 
-  <view class="category-list">
-    <block wx:for="{{categories}}" wx:key="*this">
-      <view
-        class="category-chip {{activeCategory === item ? 'category-chip-active' : ''}}"
-        bindtap="switchCategory"
-        data-category="{{item}}"
-      >
-        {{item}}
-      </view>
-    </block>
+  <view class="card ai-tip-card card-breath">
+    <view class="ai-tip-header">
+      <view class="dot-pulse"></view>
+      <text class="ai-tip-label">AI 今日风物推荐</text>
+    </view>
+    <view class="ai-tip-body">
+      <text class="ai-tip-icon">{{aiTip.icon}}</text>
+      <text class="ai-tip-text">{{aiTip.text}}</text>
+    </view>
   </view>
 
-  <block wx:for="{{visibleItems}}" wx:key="id">
-    <view class="card item-card">
-      <view class="row-between">
-        <view class="item-name">{{item.name}}</view>
-        <view class="item-category">{{item.category}}</view>
-      </view>
-      <view class="item-desc">{{item.description}}</view>
-      <view class="item-recommend">推荐玩法：{{item.recommend}}</view>
-      <view class="tag-row">
-        <block wx:for="{{item.tags}}" wx:key="*this">
-          <text class="tag">{{item}}</text>
+  <view class="section-spacing">
+    <view class="section-title">今日古港味道</view>
+    <scroll-view class="today-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="today-track">
+        <block wx:for="{{visibleItems}}" wx:key="id" wx:if="{{item.crowdLevel === '热门'}}">
+          <view class="today-card" bindtap="openStory" data-id="{{item.id}}">
+            <image class="today-img" src="{{item.image}}" mode="aspectFill" />
+            <view class="today-overlay">
+              <view class="today-hot">🔥 热门推荐</view>
+              <view class="today-name">{{item.name}}</view>
+            </view>
+          </view>
         </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section-spacing">
+    <view class="section-title">分类浏览</view>
+    <scroll-view class="category-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="category-wrap">
+        <block wx:for="{{categories}}" wx:key="*this">
+          <view class="cat-chip {{activeCategory === item ? 'cat-chip-active' : ''}}" bindtap="switchCategory" data-category="{{item}}">{{item}}</view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="card-entrance">
+  <block wx:for="{{visibleItems}}" wx:key="id">
+    <view class="card specialty-card card-tap-fb">
+      <image class="specialty-img" src="{{item.image}}" mode="aspectFill" catchtap="previewImage" data-src="{{item.image}}" />
+      <view class="specialty-body">
+        <view class="row-between">
+          <view class="specialty-name">{{item.name}}</view>
+          <view class="specialty-cat">{{item.category}}</view>
+        </view>
+        <view class="specialty-desc">{{item.description}}</view>
+        <view class="specialty-meta">
+          <view class="meta-item">
+            <text class="meta-dot"></text>
+            <text>{{item.recommend}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-icon-sm">🕐</text>
+            <text>{{item.bestTime}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-icon-sm">{{item.crowdLevel === '热门' ? '🔥' : '👥'}}</text>
+            <text>{{item.crowdLevel}}</text>
+          </view>
+        </view>
+        <view class="tag-row">
+          <block wx:for="{{item.tags}}" wx:key="*this">
+            <text class="tag">{{item}}</text>
+          </block>
+        </view>
+        <view class="story-link" catchtap="openStory" data-id="{{item.id}}">📖 查看风物故事 ›</view>
       </view>
     </view>
   </block>
+</view>
+
+  <view class="story-mask {{showStory ? 'show' : ''}}" bindtap="closeStory"></view>
+  <view class="story-panel {{showStory ? 'show' : ''}}">
+    <view class="story-panel-handle"></view>
+    <view class="story-panel-header">
+      <view class="story-panel-title">{{storyItem.name}}</view>
+      <view class="story-panel-close" catchtap="closeStory">✕</view>
+    </view>
+    <view class="story-panel-scroll">
+      <image class="story-panel-img" wx:if="{{storyItem.image}}" src="{{storyItem.image}}" mode="aspectFill" catchtap="previewImage" data-src="{{storyItem.image}}" />
+      <view class="story-panel-body">{{storyItem.story}}</view>
+      <view class="story-panel-footer">
+        <text>推荐时间：{{storyItem.bestTime}}</text>
+        <text>热度：{{storyItem.crowdLevel}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-text">潮味 · 侨韵 · 古港风物</view>
+    <view class="footer-line"></view>
+  </view>
+
+  <view class="back-top {{showBackTop ? 'back-top-show' : ''}}" bindtap="scrollToTop">
+    <text class="back-top-icon">^</text>
+  </view>
 </view>

@@ -89,6 +89,12 @@ function isRegisteredActivity(activityId) {
   return getArray(ACTIVITY_REGISTRATIONS_KEY).some((item) => item.id === activityId);
 }
 
+function unregisterActivity(activityId) {
+  const registrations = getArray(ACTIVITY_REGISTRATIONS_KEY).filter((item) => item.id !== activityId);
+  setArray(ACTIVITY_REGISTRATIONS_KEY, registrations);
+  return registrations;
+}
+
 module.exports = {
   toggleFavoriteSpot,
   isFavoriteSpot,
@@ -96,6 +102,7 @@ module.exports = {
   addRecentSpot,
   getRecentSpots,
   registerActivity,
+  unregisterActivity,
   getActivityRegistrations,
   isRegisteredActivity
 };

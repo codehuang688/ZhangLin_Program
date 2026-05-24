@@ -1,76 +1,192 @@
+<import src="../../templates/card-templates" />
 <view class="page">
-  <view class="card hero-card">
-    <image class="cover-image" src="{{coverImage}}" mode="aspectFill" />
-    <view class="profile-badge">游客服务中心</view>
-    <view class="profile-name">欢迎来到樟林古港</view>
-    <view class="profile-desc">在这里集中查看活动资讯、文化专题、风物推荐与导览服务入口。</view>
+  <view class="hero-banner" style="transform: translateY({{bannerOffset}}rpx)">
+    <image class="hero-bg" src="/assets/images/nanshengli-aerial.jpg" mode="aspectFill" />
+    <view class="hero-veil"></view>
+    <view class="hero-particles">
+      <view class="hero-particle p1"></view>
+      <view class="hero-particle p2"></view>
+      <view class="hero-particle p3"></view>
+      <view class="hero-particle p4"></view>
+      <view class="hero-particle p5"></view>
+    </view>
+    <view class="hero-content">
+      <view class="hero-level-row">
+        <view class="hero-level-badge">Lv.{{userLevel}}</view>
+        <view class="hero-title-text">{{userTitle}}</view>
+      </view>
+      <view class="hero-name">我的古港旅程</view>
+      <view class="hero-progress-wrap">
+        <view class="hero-progress-bar">
+          <view class="hero-progress-fill {{animShimmer ? 'shimmer-on' : ''}}" style="width:{{explorePercent}}%">
+            <view class="hero-progress-glow"></view>
+          </view>
+        </view>
+        <view class="hero-progress-text">文化探索度 {{explorePercent}}%</view>
+      </view>
+    </view>
   </view>
 
   <view class="stats grid-3">
     <block wx:for="{{profileStats}}" wx:key="label">
-      <view class="card stat-card">
-        <view class="stat-value">{{item.value}}</view>
+      <view class="card stat-card glow-card" bindtap="handleStatTap" data-target="{{item.target}}" hover-class="card-tap">
+        <view class="stat-icon">{{item.icon}}</view>
+        <view class="stat-value number-flip">{{item.value}}</view>
         <view class="stat-label">{{item.label}}</view>
+        <view class="stat-trend" wx:if="{{item.trend}}">{{item.trend}}</view>
       </view>
     </block>
   </view>
 
-  <view class="section">
+  <view class="card ai-journey-card breath-card">
+    <view class="ai-journey-header">
+      <view class="ai-journey-dot"></view>
+      <text class="ai-journey-label">AI 旅程助手</text>
+    </view>
+    <view class="ai-journey-body">
+      <text class="ai-journey-icon">{{aiTip.icon}}</text>
+      <text class="ai-journey-text">{{aiTip.text}}</text>
+    </view>
+  </view>
+
+  <view class="section-spacing" wx:if="{{hasFootprint}}" id="footprint-section">
+    <view class="section-title">我的古港足迹</view>
+    <view class="card footprint-card">
+      <map class="footprint-map" latitude="{{footprintCenter.lat}}" longitude="{{footprintCenter.lng}}" markers="{{footprintMarkers}}" scale="16" show-location="{{false}}" enable-zoom="{{false}}" enable-scroll="{{false}}" enable-rotate="{{false}}" />
+      <view class="footprint-count">已点亮 {{footprintMarkers.length}} 个文化记忆点</view>
+    </view>
+  </view>
+
+  <view class="section-spacing">
+    <view class="section-title">文化勋章</view>
+    <scroll-view class="badge-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="badge-track">
+        <block wx:for="{{badges}}" wx:key="id">
+          <view class="badge-card {{item.unlocked ? 'unlocked badge-glow' : 'locked'}}" bindtap="handleBadgeTap" data-id="{{item.id}}">
+            <view class="badge-icon-wrap">
+              <text class="badge-icon">{{item.icon}}</text>
+              <view class="badge-lock" wx:if="{{!item.unlocked}}">🔒</view>
+            </view>
+            <view class="badge-name">{{item.name}}</view>
+            <view class="badge-desc">{{item.desc}}</view>
+            <view class="badge-level">{{item.unlocked ? '已解锁' : '未解锁'}}</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section-spacing">
     <view class="section-title">常用服务</view>
     <block wx:for="{{profileServices}}" wx:key="id">
-      <view class="card service-card" bindtap="openService" data-type="{{item.type}}" data-target="{{item.target}}">
+      <view class="card card-spacing ripple-card" bindtap="openService" data-type="{{item.type}}" data-target="{{item.target}}">
         <view class="service-title">{{item.title}}</view>
         <view class="service-desc">{{item.desc}}</view>
       </view>
     </block>
   </view>
 
-  <view class="section">
-    <view class="section-title">收藏景点</view>
+  <view class="section-spacing" id="favorite-section">
+    <view class="section-title">收藏景点 · {{profileStats[2].value}}</view>
     <block wx:if="{{favoriteSpots.length}}">
       <block wx:for="{{favoriteSpots}}" wx:key="id">
-        <view class="card record-card" bindtap="openSpot" data-id="{{item.id}}">
-          <image class="record-image" src="{{item.image}}" mode="aspectFill" />
-          <view class="service-title">{{item.name}}</view>
-          <view class="service-desc">{{item.summary}}</view>
+        <view class="card card-spacing" bindtap="openSpot" data-id="{{item.id}}">
+          <template is="spot-card" data="{{spot: item}}" />
         </view>
       </block>
     </block>
-    <view class="card empty-card" wx:else>还没有收藏景点，可以先去景点详情页点击“收藏景点”。</view>
+    <view class="card empty-card" wx:else>还没有收藏，可到景点详情页点击"收藏景点"。</view>
   </view>
 
-  <view class="section">
-    <view class="section-title">最近浏览</view>
+  <view class="section-spacing" id="recent-section">
+    <view class="section-title">最近浏览 · {{profileStats[0].value}}</view>
     <block wx:if="{{recentSpots.length}}">
       <block wx:for="{{recentSpots}}" wx:key="id">
-        <view class="card record-card" bindtap="openSpot" data-id="{{item.id}}">
-          <image class="record-image" src="{{item.image}}" mode="aspectFill" />
-          <view class="service-title">{{item.name}}</view>
-          <view class="service-desc">{{item.summary}}</view>
+        <view class="card card-spacing" bindtap="openSpot" data-id="{{item.id}}">
+          <template is="spot-card" data="{{spot: item}}" />
+          <view class="recent-time">{{recentTimes[index]}}</view>
+          <view class="read-progress-wrap" wx:if="{{readProgresses[index]}}">
+            <view class="read-progress-bar">
+              <view class="read-progress-fill" style="width:{{readProgresses[index]}}%"></view>
+            </view>
+            <text class="read-progress-text">已阅读 {{readProgresses[index]}}%</text>
+          </view>
+          <view class="recent-ai-rec" wx:if="{{aiRecs[index]}}">💡 {{aiRecs[index]}}</view>
         </view>
       </block>
     </block>
-    <view class="card empty-card" wx:else>最近浏览记录会在你进入景点详情后自动生成。</view>
+    <view class="card empty-card" wx:else>浏览记录会在你进入景点详情后自动生成。</view>
   </view>
 
-  <view class="section">
-    <view class="section-title">我的报名</view>
+  <view class="section-spacing" id="registration-section">
+    <view class="section-title">我的报名 · {{profileStats[1].value}}</view>
     <block wx:if="{{registeredActivities.length}}">
       <block wx:for="{{registeredActivities}}" wx:key="id">
-        <view class="card record-card" bindtap="openActivity" data-id="{{item.id}}">
-          <image class="record-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="card card-spacing" bindtap="openActivity" data-id="{{item.id}}">
+          <image class="record-image card-img-top" src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}" catchtap="previewImage" data-src="{{item.image}}" />
           <view class="service-title">{{item.title}}</view>
           <view class="service-desc">{{item.date}} · {{item.place}}</view>
+          <view class="registration-countdown" wx:if="{{item.countdown}}">⏳ {{item.countdown}}</view>
+          <view class="unregister-btn ripple-btn" catchtap="unregister" data-id="{{item.id}}">取消报名</view>
         </view>
       </block>
     </block>
-    <view class="card empty-card" wx:else>活动报名记录会显示在这里，方便你快速回看。</view>
+    <view class="card empty-card" wx:else>还没有报名的活动，可到活动资讯页面报名。</view>
   </view>
 
-  <view class="section">
-    <view class="section-title">出行提醒</view>
-    <block wx:for="{{reminders}}" wx:key="*this">
-      <view class="card reminder-card">{{item}}</view>
+  <view class="section-spacing" id="journey-section">
+    <view class="section-title">我的年度旅程</view>
+    <view class="card journey-year-card">
+      <view class="journey-year-head">
+        <text class="journey-year-num">{{journeySummary.year}}</text>
+        <text class="journey-year-label">古港记忆</text>
+      </view>
+      <view class="journey-year-stats">
+        <view class="journey-year-stat">
+          <text class="jys-num">{{journeySummary.spotCount}}</text>
+          <text class="jys-label">探索文化点</text>
+        </view>
+        <view class="journey-year-stat">
+          <text class="jys-num">{{journeySummary.routesDone}}</text>
+          <text class="jys-label">完成路线</text>
+        </view>
+        <view class="journey-year-stat">
+          <text class="jys-num">{{journeySummary.actCount}}</text>
+          <text class="jys-label">参与活动</text>
+        </view>
+        <view class="journey-year-stat">
+          <text class="jys-num">{{journeySummary.favCount}}</text>
+          <text class="jys-label">收藏风物</text>
+        </view>
+      </view>
+      <view class="journey-year-total" wx:if="{{journeySummary.done}}">
+        <text>已点亮 {{journeySummary.totalMemories}} 个古港记忆点</text>
+        <text class="journey-year-extra">· 浏览 {{journeySummary.storiesRead}} 篇文化故事</text>
+      </view>
+      <view class="journey-year-total journey-year-empty" wx:else>还没开始探索 · 从红头船启程吧</view>
+    </view>
+  </view>
+
+  <view class="section-spacing">
+    <view class="section-title">古港之旅</view>
+    <block wx:for="{{journeyTips}}" wx:key="title">
+      <view class="card journey-tip-card">
+        <view class="journey-tip-icon">{{item.icon}}</view>
+        <view class="journey-tip-body">
+          <view class="journey-tip-title">{{item.title}}</view>
+          <view class="journey-tip-desc">{{item.desc}}</view>
+        </view>
+      </view>
     </block>
+  </view>
+
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-text">2026 古港记忆 · 数字旅程中心</view>
+    <view class="footer-line"></view>
+  </view>
+
+  <view class="back-top {{showBackTop ? 'back-top-show' : ''}}" bindtap="scrollToTop">
+    <text class="back-top-icon">^</text>
   </view>
 </view>

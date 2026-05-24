@@ -30,7 +30,7 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.6.4",
+  "libVersion": "3.16.0",
   "appid": "wxe49fc80e433ea124",
   "projectname": "zhanglin-gang-tour",
   "condition": {},

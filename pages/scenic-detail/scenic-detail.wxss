@@ -1,14 +1,22 @@
+@keyframes skeletonShimmer {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}
+
+.skeleton-block {
+  background: #e8e0d6;
+  border-radius: 12rpx;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
 .hero-card {
   background: linear-gradient(135deg, #ead8d1, #faf6f4);
   overflow: hidden;
 }
 
 .spot-image {
-  width: calc(100% + 56rpx);
   height: 320rpx;
-  margin: -28rpx -28rpx 20rpx;
-  display: block;
-  border-radius: 24rpx 24rpx 0 0;
 }
 
 .spot-category {
@@ -51,10 +59,6 @@
   margin-top: 14rpx;
   color: #6f6258;
   line-height: 1.75;
-}
-
-.section {
-  margin-top: 30rpx;
 }
 
 .gallery-scroll {

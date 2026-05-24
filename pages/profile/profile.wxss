@@ -1,93 +1,694 @@
-.hero-card {
-  background: linear-gradient(135deg, #eadfd4, #fbf7f3);
+/* ===== 覆盖全局 page 内边距 ===== */
+.page {
+  padding: 0;
+  padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+}
+
+/* ==================== 沉浸 Banner ==================== */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 520rpx;
   overflow: hidden;
 }
 
-.cover-image {
-  width: calc(100% + 56rpx);
-  height: 280rpx;
-  margin: -28rpx -28rpx 20rpx;
+.hero-bg {
+  position: absolute;
+  top: -20rpx;
+  left: -20rpx;
+  width: calc(100% + 40rpx);
+  height: calc(100% + 40rpx);
   display: block;
-  border-radius: 24rpx 24rpx 0 0;
 }
 
-.profile-badge {
-  display: inline-block;
-  padding: 10rpx 20rpx;
+.hero-veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(20,12,6,0.3) 0%, rgba(35,18,8,0.5) 35%, rgba(55,28,12,0.72) 65%, rgba(70,38,20,0.85) 100%);
+}
+
+/* ===== Banner 粒子 ===== */
+.hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(240, 200, 140, 0.5);
+  box-shadow: 0 0 6rpx rgba(240, 200, 140, 0.4);
+}
+
+.p1 { width: 8rpx; height: 8rpx; top: 18%; left: 12%; animation: partFloat1 6s ease-in-out infinite; }
+.p2 { width: 6rpx; height: 6rpx; top: 32%; left: 75%; animation: partFloat2 8s ease-in-out infinite 1s; }
+.p3 { width: 10rpx; height: 10rpx; top: 55%; left: 22%; animation: partFloat3 7s ease-in-out infinite 2s; }
+.p4 { width: 5rpx; height: 5rpx; top: 45%; left: 85%; animation: partFloat1 9s ease-in-out infinite 0.5s; }
+.p5 { width: 7rpx; height: 7rpx; top: 68%; left: 60%; animation: partFloat2 7.5s ease-in-out infinite 3s; }
+
+@keyframes partFloat1 {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+  50% { transform: translateY(-30rpx) translateX(16rpx); opacity: 0.7; }
+}
+
+@keyframes partFloat2 {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
+  50% { transform: translateY(-20rpx) translateX(-12rpx); opacity: 0.6; }
+}
+
+@keyframes partFloat3 {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.25; }
+  50% { transform: translateY(-36rpx) translateX(8rpx); opacity: 0.65; }
+}
+
+/* ===== Banner 内容 ===== */
+.hero-content {
+  position: absolute;
+  bottom: 36rpx;
+  left: 32rpx;
+  right: 32rpx;
+  z-index: 2;
+}
+
+.hero-level-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 10rpx;
+}
+
+.hero-level-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 22rpx;
   border-radius: 999rpx;
-  background: rgba(145, 73, 43, 0.12);
-  color: #8d4e30;
   font-size: 22rpx;
-}
-
-.profile-name {
-  margin-top: 18rpx;
-  font-size: 44rpx;
   font-weight: 700;
-  color: #342720;
+  color: #fff7e6;
+  background: linear-gradient(135deg, #c89050, #a07040);
+  border: 1rpx solid rgba(255, 230, 180, 0.35);
+  box-shadow: 0 4rpx 16rpx rgba(200, 144, 80, 0.3);
+  letter-spacing: 2rpx;
 }
 
-.profile-desc,
-.service-desc,
-.reminder-card,
-.empty-card {
-  margin-top: 12rpx;
-  line-height: 1.7;
-  color: #6f6258;
+.hero-title-text {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: rgba(255, 240, 220, 0.85);
+  letter-spacing: 2rpx;
 }
 
+.hero-name {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #fffdf6;
+  letter-spacing: 3rpx;
+  text-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.35);
+  margin-bottom: 18rpx;
+}
+
+/* ===== 进度条 ===== */
+.hero-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.hero-progress-bar {
+  width: 100%;
+  height: 8rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.hero-progress-fill {
+  position: relative;
+  height: 100%;
+  border-radius: 999rpx;
+  background: linear-gradient(90deg, #f0c078, #e8b050, #d4943a);
+  box-shadow: 0 0 12rpx rgba(240, 192, 120, 0.5);
+  transition: width 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-progress-fill.shimmer-on {
+  background: linear-gradient(90deg, #f0c078, #e8b050, #f5d090, #d4943a, #f0c078);
+  background-size: 200% 100%;
+  animation: shimmerFlow 2.5s linear infinite;
+}
+
+.hero-progress-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40rpx;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
+  border-radius: 0 999rpx 999rpx 0;
+}
+
+.hero-progress-text {
+  font-size: 22rpx;
+  color: rgba(255, 240, 218, 0.75);
+  letter-spacing: 1rpx;
+}
+
+/* ==================== 统计卡片 ==================== */
 .stats {
-  margin-top: 20rpx;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20rpx;
-}
-
-.stat-card,
-.service-card,
-.reminder-card,
-.record-card,
-.empty-card {
-  margin-top: 18rpx;
+  margin: -30rpx 24rpx 0;
+  position: relative;
+  z-index: 3;
 }
 
 .stat-card {
   text-align: center;
+  padding: 28rpx 12rpx 20rpx;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.stat-card:active {
+  transform: scale(0.95);
+  box-shadow: 0 4rpx 20rpx rgba(180, 120, 40, 0.18);
+}
+
+.stat-icon {
+  font-size: 40rpx;
+  margin-bottom: 6rpx;
 }
 
 .stat-value {
-  font-size: 42rpx;
-  font-weight: 700;
+  font-size: 44rpx;
+  font-weight: 800;
   color: #944326;
+  animation: numberFlip 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 .stat-label {
-  margin-top: 10rpx;
+  margin-top: 4rpx;
+  font-size: 22rpx;
   color: #7a6b60;
+}
+
+.stat-trend {
+  margin-top: 8rpx;
+  font-size: 18rpx;
+  color: #b86a3a;
+  letter-spacing: 0.5rpx;
+}
+
+/* ==================== AI 旅程助手 ==================== */
+.ai-journey-card {
+  margin: 28rpx 24rpx 0;
+  background: linear-gradient(135deg, #2a1a0f, #3d2616);
+  border: 1rpx solid rgba(200, 144, 80, 0.18);
+  border-radius: var(--radius-card);
+  padding: 26rpx 28rpx;
+  box-shadow: 0 8rpx 28rpx rgba(40, 18, 5, 0.25);
+  animation: breathCard 4s ease-in-out infinite;
+}
+
+.ai-journey-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 14rpx;
+}
+
+.ai-journey-dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 10rpx rgba(74, 222, 128, 0.6);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+.ai-journey-label {
   font-size: 24rpx;
+  font-weight: 600;
+  color: #a09078;
+  letter-spacing: 1rpx;
 }
 
-.section {
-  margin-top: 30rpx;
+.ai-journey-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 14rpx;
 }
 
+.ai-journey-icon {
+  font-size: 36rpx;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.ai-journey-text {
+  font-size: 26rpx;
+  color: #e8dac8;
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* ==================== 内容区 ==================== */
+.section-spacing {
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  margin-top: 36rpx;
+}
+
+/* ==================== 地图足迹 ==================== */
+.footprint-card {
+  margin-top: 16rpx;
+  padding: 0;
+  overflow: hidden;
+}
+
+.footprint-map {
+  width: 100%;
+  height: 320rpx;
+  display: block;
+}
+
+.footprint-count {
+  padding: 18rpx 28rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #6b4e36;
+  text-align: center;
+  border-top: 1rpx solid rgba(180, 140, 100, 0.12);
+}
+
+/* ==================== 勋章 ==================== */
+.badge-scroll {
+  margin-top: 20rpx;
+  white-space: nowrap;
+}
+
+.badge-track {
+  display: inline-flex;
+  gap: 18rpx;
+}
+
+.badge-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 210rpx;
+  padding: 26rpx 18rpx 22rpx;
+  border-radius: var(--radius-card);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-card);
+  white-space: normal;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.badge-card:active {
+  transform: scale(0.95);
+}
+
+.badge-card.unlocked {
+  background: linear-gradient(145deg, #fff8ee, #faecd8);
+  border: 1rpx solid rgba(200, 160, 100, 0.3);
+  box-shadow: 0 8rpx 28rpx rgba(180, 120, 40, 0.12);
+}
+
+.badge-card.badge-glow {
+  animation: badgeGlow 3s ease-in-out infinite;
+}
+
+@keyframes badgeGlow {
+  0%, 100% { box-shadow: 0 8rpx 28rpx rgba(180, 120, 40, 0.12); }
+  50% { box-shadow: 0 8rpx 36rpx rgba(220, 170, 80, 0.28); }
+}
+
+.badge-card.locked {
+  opacity: 0.55;
+}
+
+.badge-icon-wrap {
+  position: relative;
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f5efe5;
+  margin-bottom: 14rpx;
+}
+
+.unlocked .badge-icon-wrap {
+  background: linear-gradient(135deg, #fae8c8, #f0d8a0);
+  box-shadow: 0 0 20rpx rgba(220, 170, 80, 0.25);
+}
+
+.badge-icon {
+  font-size: 38rpx;
+  line-height: 1;
+}
+
+.badge-lock {
+  position: absolute;
+  bottom: -4rpx;
+  right: -6rpx;
+  font-size: 22rpx;
+}
+
+.badge-name {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #392818;
+  text-align: center;
+  margin-bottom: 6rpx;
+}
+
+.badge-desc {
+  font-size: 20rpx;
+  color: #8a7660;
+  text-align: center;
+  line-height: 1.4;
+  margin-bottom: 10rpx;
+}
+
+.badge-level {
+  font-size: 18rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 999rpx;
+  background: #f5ece0;
+  color: #8a6a48;
+}
+
+.unlocked .badge-level {
+  background: #e8d4b0;
+  color: #7a5020;
+}
+
+/* ==================== 常用服务 ==================== */
 .service-title {
-  font-size: 32rpx;
+  font-size: 30rpx;
   font-weight: 700;
   color: #382a21;
 }
 
-.record-image {
-  width: calc(100% + 56rpx);
-  height: 220rpx;
-  margin: -28rpx -28rpx 22rpx;
-  display: block;
-  border-radius: 24rpx 24rpx 0 0;
+.service-desc {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #6f6258;
+  line-height: 1.6;
 }
 
-.empty-card {
-  background: #fff8f3;
+/* ===== 波纹卡片 ===== */
+.ripple-card:active {
+  transform: scale(0.975);
+  box-shadow: 0 4rpx 18rpx rgba(160, 110, 50, 0.12);
 }
+
+/* ==================== 模板卡片 ==================== */
+.spot-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #33241a;
+}
+
+.spot-duration {
+  font-size: 22rpx;
+  color: #a56442;
+}
+
+.spot-summary {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #6e6054;
+  line-height: 1.7;
+}
+
+/* ==================== 最近浏览 ==================== */
+.recent-time {
+  margin-top: 14rpx;
+  padding-top: 14rpx;
+  border-top: 1rpx solid rgba(180, 140, 100, 0.12);
+  font-size: 22rpx;
+  color: #a89078;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.recent-time::before {
+  content: '🕐';
+  font-size: 20rpx;
+}
+
+/* ===== 阅读进度 ===== */
+.read-progress-wrap {
+  margin-top: 10rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.read-progress-bar {
+  flex: 1;
+  height: 6rpx;
+  border-radius: 999rpx;
+  background: #eee5d9;
+  overflow: hidden;
+}
+
+.read-progress-fill {
+  height: 100%;
+  border-radius: 999rpx;
+  background: linear-gradient(90deg, #c89050, #b07040);
+  transition: width 0.8s ease;
+}
+
+.read-progress-text {
+  font-size: 20rpx;
+  color: #a08878;
+  white-space: nowrap;
+}
+
+/* ===== AI 推荐 ===== */
+.recent-ai-rec {
+  margin-top: 10rpx;
+  padding: 10rpx 18rpx;
+  background: linear-gradient(135deg, #f8f2e8, #f0e5d4);
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  color: #8b5a3a;
+  line-height: 1.5;
+  border: 1rpx solid rgba(200, 150, 100, 0.15);
+}
+
+/* ==================== 报名活动 ==================== */
+.record-image {
+  height: 240rpx;
+}
+
+.registration-countdown {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: #b86a3a;
+  letter-spacing: 1rpx;
+}
+
+/* ===== 按钮波纹 ===== */
+.unregister-btn {
+  margin-top: 20rpx;
+  padding: 14rpx 0;
+  text-align: center;
+  border-radius: 999rpx;
+  background: #fdf3e8;
+  color: #a84e2a;
+  font-size: 24rpx;
+  font-weight: 500;
+  border: 1rpx solid rgba(180, 120, 80, 0.15);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.unregister-btn:active {
+  background: #f5dcc4;
+  transform: scale(0.96);
+}
+
+/* ==================== 年度旅程 ==================== */
+.journey-year-card {
+  margin-top: 16rpx;
+  padding: 30rpx 28rpx;
+  background: linear-gradient(135deg, #fff8ed, #f5ead8);
+  border: 1rpx solid rgba(200, 150, 100, 0.25);
+  border-radius: var(--radius-card);
+}
+
+.journey-year-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.journey-year-num {
+  font-size: 52rpx;
+  font-weight: 800;
+  color: #8b3a1a;
+  letter-spacing: 2rpx;
+}
+
+.journey-year-label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #9a7858;
+}
+
+.journey-year-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.journey-year-stat {
+  text-align: center;
+  flex: 1;
+}
+
+.jys-num {
+  display: block;
+  font-size: 38rpx;
+  font-weight: 800;
+  color: #944326;
+  margin-bottom: 4rpx;
+  animation: numberFlip 0.5s ease both;
+}
+
+.jys-label {
+  font-size: 20rpx;
+  color: #8a7260;
+  line-height: 1.3;
+}
+
+.journey-year-total {
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #6b4e36;
+  padding-top: 16rpx;
+  border-top: 1rpx solid rgba(160, 120, 80, 0.15);
+  line-height: 1.6;
+}
+
+.journey-year-extra {
+  display: block;
+  font-size: 22rpx;
+  color: #8a7260;
+  font-weight: 400;
+  margin-top: 4rpx;
+}
+
+.journey-year-empty {
+  color: #a09080;
+  font-weight: 400;
+}
+
+/* ==================== 古港之旅 ==================== */
+.journey-tip-card {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: flex-start;
+  gap: 20rpx;
+}
+
+.journey-tip-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  background: #f5ebe0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  flex-shrink: 0;
+}
+
+.journey-tip-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-tip-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #3a2516;
+  margin-bottom: 6rpx;
+}
+
+.journey-tip-desc {
+  font-size: 24rpx;
+  color: #7a6858;
+  line-height: 1.6;
+}
+
+/* ==================== 页面底部 ==================== */
+.page-footer {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  margin: 50rpx 24rpx 0;
+  padding-bottom: 20rpx;
+}
+
+.footer-line {
+  flex: 1;
+  height: 1rpx;
+  background: linear-gradient(90deg, transparent, rgba(160, 120, 70, 0.25), transparent);
+}
+
+.footer-text {
+  font-size: 22rpx;
+  color: #b09880;
+  letter-spacing: 2rpx;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ==================== 空状态 ==================== */
+.empty-card {
+  margin-top: 12rpx;
+  line-height: 1.7;
+  color: #6f6258;
+  background: #fff8f3;
+  font-size: 26rpx;
+}
+
+/* ==================== Section 卡片适配 ==================== */
+#favorite-section .card-spacing:first-child,
+#recent-section .card-spacing:first-child,
+#registration-section .card-spacing:first-child {
+  margin-top: 16rpx;
+}
+
+/* ==================== 入场动画 ==================== */
+.card-spacing {
+  animation: fadeUp 0.45s ease both;
+}
+
+.card-spacing:nth-child(2) { animation-delay: 0.08s; }
+.card-spacing:nth-child(3) { animation-delay: 0.16s; }
+.card-spacing:nth-child(4) { animation-delay: 0.24s; }
+.card-spacing:nth-child(5) { animation-delay: 0.32s; }
+
+.stat-card:nth-child(1) .stat-value { animation-delay: 0.05s; }
+.stat-card:nth-child(2) .stat-value { animation-delay: 0.15s; }
+.stat-card:nth-child(3) .stat-value { animation-delay: 0.25s; }

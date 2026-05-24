@@ -1,34 +1,156 @@
 <view class="page">
-  <view class="card intro-card">
-    <view class="section-title">地域文化科普</view>
-    <view class="section-subtitle">以更易理解的方式梳理樟林古港的海贸记忆、侨乡文脉与建筑审美</view>
+  <view class="hero-banner" style="transform: translateY({{bannerOffset}}rpx)">
+    <image class="hero-bg" src="/assets/images/red-ship.jpg" mode="aspectFill" />
+    <view class="hero-veil"></view>
+    <view class="hero-particles">
+      <view class="hp hp1"></view>
+      <view class="hp hp2"></view>
+      <view class="hp hp3"></view>
+      <view class="hp hp4"></view>
+    </view>
+    <view class="hero-content">
+      <view class="hero-badge">海丝文化 · 数字展馆</view>
+      <view class="hero-headline">千年古港</view>
+      <view class="hero-tagline">潮汕侨乡文化记忆</view>
+      <view class="hero-desc-text">红头船从这里起航，侨批越过海洋，古建筑镌刻时光</view>
+    </view>
   </view>
 
-  <view class="topic-list">
-    <block wx:for="{{cultureTopics}}" wx:key="id">
-      <view
-        class="topic-chip {{activeTopicId === item.id ? 'topic-chip-active' : ''}}"
-        bindtap="switchTopic"
-        data-id="{{item.id}}"
-      >
-        {{item.title}}
+  <view class="card ai-culture-card card-breath" bindtap="askAiCulture" data-q="{{cultureAiQA[0].q}}">
+    <view class="ai-culture-header">
+      <view class="dot-pulse"></view>
+      <text class="ai-culture-label">AI 文化助手</text>
+    </view>
+    <view class="ai-culture-body">
+      <text>想了解红头船、海丝文化或侨乡故事？点击下方问题快速获取讲解</text>
+    </view>
+    <view class="ai-culture-chips">
+      <block wx:for="{{cultureAiQA}}" wx:key="q">
+        <view class="ai-chip" catchtap="askAiCulture" data-q="{{item.q}}">{{item.q}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class="ai-answer-card {{showAiAnswer ? 'show' : ''}}">
+    <view class="ai-answer-header">
+      <text class="ai-answer-icon">🤖</text>
+      <text class="ai-answer-label">AI 文化讲解</text>
+      <view class="ai-answer-close" catchtap="closeAiAnswer">✕</view>
+    </view>
+    <view class="ai-answer-q">{{aiQuestion}}</view>
+    <view class="ai-answer-divider"></view>
+    <view class="ai-answer-a">{{aiAnswer}}</view>
+  </view>
+
+  <view class="section-spacing">
+    <view class="section-title">文化专题</view>
+    <scroll-view class="topic-tabs-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="topic-tabs-wrap">
+        <block wx:for="{{cultureTopics}}" wx:key="id">
+          <view class="topic-tab {{activeTopicId === item.id ? 'active' : ''}}" bindtap="switchTopic" data-id="{{item.id}}">
+            {{item.title}}
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+
+    <view class="topic-hero-card">
+      <image class="topic-hero-img" src="{{activeTopic.image}}" mode="aspectFill" catchtap="previewImage" data-src="{{activeTopic.image}}" />
+      <view class="topic-hero-body">
+        <view class="topic-hero-title">{{activeTopic.title}}</view>
+        <view class="topic-hero-intro">{{activeTopic.intro}}</view>
+      </view>
+    </view>
+
+    <block wx:for="{{activeTopic.sections}}" wx:key="*this">
+      <view class="card section-card">
+        <view class="section-num">{{index + 1}}</view>
+        <view class="section-text">{{item}}</view>
+      </view>
+    </block>
+
+    <view class="card facts-card">
+      <view class="facts-label">延伸提示</view>
+      <block wx:for="{{activeTopic.facts}}" wx:key="*this">
+        <view class="fact-item">{{item}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section-spacing card-entrance">
+    <view class="section-title">文化年轮</view>
+    <view class="section-subtitle">樟林古港从明代至今的文化演进历程</view>
+    <scroll-view class="culture-timeline-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="culture-timeline-track">
+        <block wx:for="{{cultureTimeline}}" wx:key="year">
+          <view class="timeline-node">
+            <view class="timeline-node-year">{{item.year}}</view>
+            <view class="timeline-node-title">{{item.title}}</view>
+            <view class="timeline-node-desc">{{item.desc}}</view>
+          </view>
+          <view class="timeline-connector" wx:if="{{index < cultureTimeline.length - 1}}">
+            <view class="connector-line"></view>
+            <view class="connector-arrow">›</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="section-spacing card-entrance">
+    <view class="section-title">华侨故事</view>
+    <view class="section-subtitle">跨越海洋的情感与记忆</view>
+    <block wx:for="{{overseasStories}}" wx:key="title">
+      <view class="card story-card card-tap-fb">
+        <view class="story-icon-wrap">
+          <text class="story-icon">{{item.icon}}</text>
+        </view>
+        <view class="story-body">
+          <view class="story-title">{{item.title}}</view>
+          <view class="story-subtitle">{{item.subtitle}}</view>
+          <view class="story-desc">{{item.desc}}</view>
+        </view>
       </view>
     </block>
   </view>
 
-  <view class="card topic-panel">
-    <view class="topic-title">{{activeTopic.title}}</view>
-    <view class="topic-intro">{{activeTopic.intro}}</view>
+  <view class="section-spacing card-entrance">
+    <view class="section-title">非遗传承</view>
+    <view class="section-subtitle">潮汕地域文化的活态延续</view>
+    <view class="heritage-grid">
+      <block wx:for="{{heritageItems}}" wx:key="id">
+        <view class="heritage-card card-tap-fb">
+          <image class="heritage-img" src="{{item.image}}" mode="aspectFill" catchtap="previewImage" data-src="{{item.image}}" />
+          <view class="heritage-badge">{{item.icon}} {{item.name}}</view>
+          <view class="heritage-desc">{{item.desc}}</view>
+        </view>
+      </block>
+    </view>
   </view>
 
-  <block wx:for="{{activeTopic.sections}}" wx:key="*this">
-    <view class="card paragraph-card">{{item}}</view>
-  </block>
+  <view class="section-spacing card-entrance">
+    <view class="section-title">数字展馆</view>
+    <view class="section-subtitle">左右滑动浏览樟林古港文化藏品</view>
+    <scroll-view class="exhibition-scroll" scroll-x="true" show-scrollbar="false">
+      <view class="exhibition-track">
+        <block wx:for="{{exhibitionItems}}" wx:key="title">
+          <view class="exhibition-card card-tap-fb">
+            <image class="exhibition-img" src="{{item.image}}" mode="aspectFill" catchtap="previewImage" data-src="{{item.image}}" />
+            <view class="exhibition-label">{{item.label}}</view>
+            <view class="exhibition-title">{{item.title}}</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
 
-  <view class="section">
-    <view class="section-title">延伸提示</view>
-    <block wx:for="{{activeTopic.facts}}" wx:key="*this">
-      <view class="card fact-card">{{item}}</view>
-    </block>
+  <view class="page-footer">
+    <view class="footer-line"></view>
+    <view class="footer-text">海丝文化 · 数字记忆</view>
+    <view class="footer-line"></view>
+  </view>
+
+  <view class="back-top {{showBackTop ? 'back-top-show' : ''}}" bindtap="scrollToTop">
+    <text class="back-top-icon">^</text>
   </view>
 </view>

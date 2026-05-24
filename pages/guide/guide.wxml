@@ -1,48 +1,151 @@
 <view class="page">
-  <view class="card banner">
-    <image class="banner-image" src="{{guideImage}}" mode="aspectFill" />
-    <view class="section-title">全域游玩导览</view>
-    <view class="section-subtitle">针对不同时间预算与游客画像，提供清晰的古港游玩节奏建议</view>
+  <view class="card guide-map-card">
+    <view class="map-header">
+      <view class="map-header-left">
+        <view class="map-title">智慧导览地图</view>
+        <view class="map-subtitle">{{activeRoute.name}} · {{activeRoute.stops.length}}个点位</view>
+      </view>
+      <view class="map-locate-btn" bindtap="onShowLocation">📍 定位</view>
+    </view>
+    <map
+      id="guideMap"
+      style="width:100%;height:420rpx"
+      latitude="{{mapLat}}"
+      longitude="{{mapLng}}"
+      scale="15"
+      markers="{{mapMarkers}}"
+      polyline="{{mapPolyline}}"
+      bindmarkertap="onMarkerTap"
+    />
+    <view class="map-legend">
+      <view class="legend-item">
+        <view class="legend-dot"></view>
+        <text>路线点位（点击查看详情）</text>
+      </view>
+      <view class="legend-item">
+        <view class="legend-line"></view>
+        <text>推荐行进路线</text>
+      </view>
+    </view>
   </view>
 
-  <scroll-view class="route-tabs" scroll-x="true" show-scrollbar="false">
+  <view class="card ai-rec-card">
+    <view class="ai-rec-header">
+      <view class="ai-rec-dot"></view>
+      <text class="ai-rec-label">AI 今日推荐</text>
+    </view>
+    <view class="ai-rec-body">
+      <text class="ai-rec-icon">{{aiTip.icon}}</text>
+      <text class="ai-rec-text">{{aiTip.text}}</text>
+    </view>
+  </view>
+
+  <view class="card-entrance">
+    <scroll-view class="route-tabs" scroll-x="true" show-scrollbar="false">
     <view class="route-tab-wrap">
       <block wx:for="{{routePlans}}" wx:key="id">
-        <view
-          class="route-tab {{activeRouteId === item.id ? 'route-tab-active' : ''}}"
-          bindtap="switchRoute"
-          data-id="{{item.id}}"
-        >
+        <view class="route-tab card-tap-fb {{activeRouteId === item.id ? 'route-tab-active' : ''}}" bindtap="switchRoute" data-id="{{item.id}}">
           {{item.name}}
         </view>
       </block>
     </view>
   </scroll-view>
 
-  <view class="card route-panel">
+  <view class="card route-summary">
     <view class="row-between">
-      <view class="route-name">{{activeRoute.name}}</view>
-      <view class="route-duration">{{activeRoute.duration}}</view>
+      <view class="route-summary-name">{{activeRoute.name}}</view>
+      <view class="route-duration-badge">{{activeRoute.duration}}</view>
     </view>
-    <view class="route-suitable">适合人群：{{activeRoute.suitable}}</view>
+    <view class="route-meta-row">
+      <view class="route-meta-item">
+        <text class="meta-icon">👥</text>
+        <text>{{activeRoute.suitable}}</text>
+      </view>
+      <view class="route-meta-item">
+        <text class="meta-icon">{{activeRoute.transport === '步行' ? '🚶' : '🚲'}}</text>
+        <text>{{activeRoute.transport}}</text>
+      </view>
+      <view class="route-meta-item">
+        <text class="meta-icon">{{activeRoute.difficulty === '轻松' ? '🟢' : '🟡'}}</text>
+        <text>{{activeRoute.difficulty || '轻松'}}</text>
+      </view>
+    </view>
     <view class="route-description">{{activeRoute.description}}</view>
   </view>
 
-  <view class="section">
+  <view class="card voice-card card-tap-fb" bindtap="startVoiceGuide">
+    <view class="voice-content">
+      <view class="voice-icon-wrap">
+        <text class="voice-icon">🎙️</text>
+      </view>
+      <view class="voice-info">
+        <view class="voice-title">全程语音导览</view>
+        <view class="voice-sub">支持普通话 · 即将支持潮汕话</view>
+      </view>
+    </view>
+    <view class="voice-play-btn">▶</view>
+  </view>
+
+  <view class="section-spacing">
     <view class="section-title">路线行程</view>
-    <block wx:for="{{activeRoute.stops}}" wx:key="time">
-      <view class="card stop-card">
-        <view class="stop-time">{{item.time}}</view>
-        <view class="stop-title">{{item.title}}</view>
-        <view class="stop-detail">{{item.detail}}</view>
+    <view class="timeline-container">
+      <block wx:for="{{activeRoute.stops}}" wx:key="time">
+        <view class="timeline-row">
+          <view class="timeline-marker">
+            <view class="timeline-num">{{index + 1}}</view>
+            <view class="timeline-line" wx:if="{{index < activeRoute.stops.length - 1}}"></view>
+          </view>
+          <view class="card timeline-card">
+            <view class="stop-time">{{item.time}}</view>
+            <view class="stop-title">{{item.title}}</view>
+            <view class="stop-detail">{{item.detail}}</view>
+            <view class="stop-walk" wx:if="{{index < activeRoute.stops.length - 1}}">
+              <text class="walk-icon">🚶</text>
+              <text>步行约{{10 + index * 5}}分钟至下一站</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section-spacing">
+    <view class="section-title">附近服务</view>
+    <view class="service-grid">
+      <block wx:for="{{nearbyServices}}" wx:key="name">
+        <view class="card service-item">
+          <view class="service-icon">{{item.icon}}</view>
+          <view class="service-name">{{item.name}}</view>
+          <view class="service-dist">{{item.dist}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section-spacing">
+    <view class="section-title">游玩建议</view>
+    <block wx:for="{{travelTips}}" wx:key="*this">
+      <view class="card card-spacing tip-card">
+        <view class="tip-num">{{index + 1}}</view>
+        <view class="tip-text">{{item}}</view>
       </view>
     </block>
   </view>
+  </view>
 
-  <view class="section">
-    <view class="section-title">游玩建议</view>
-    <block wx:for="{{travelTips}}" wx:key="*this">
-      <view class="card tip-card">{{item}}</view>
-    </block>
+  <view class="stop-detail-mask {{showStopDetail ? 'show' : ''}}" bindtap="closeStopDetail"></view>
+  <view class="stop-detail-panel {{showStopDetail ? 'show' : ''}}">
+    <view class="panel-handle"></view>
+    <view class="panel-stop-time">{{detailStop.time}}</view>
+    <view class="panel-stop-title">{{detailStop.title}}</view>
+    <view class="panel-stop-detail">{{detailStop.detail}}</view>
+    <view class="panel-actions">
+      <view class="panel-btn" bindtap="startVoiceGuide">🎙️ 语音讲解</view>
+      <view class="panel-btn primary" bindtap="closeStopDetail">导航到这里</view>
+    </view>
+  </view>
+
+  <view class="back-top {{showBackTop ? 'back-top-show' : ''}}" bindtap="scrollToTop">
+    <text class="back-top-icon">^</text>
   </view>
 </view>
