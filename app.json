@@ -6,10 +6,12 @@
     "pages/specialty/specialty",
     "pages/activity/activity",
     "pages/profile/profile",
-    "pages/scenic-detail/scenic-detail"
+    "pages/scenic-detail/scenic-detail",
+    "pages/ship-3d/ship-3d",
+    "pages/ai-chat/ai-chat"
   ],
   "window": {
-    "navigationBarTitleText": "樟林古港文旅服务",
+    "navigationBarTitleText": "樟林归舟",
     "navigationBarBackgroundColor": "#f7efe5",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#f5f3ef",

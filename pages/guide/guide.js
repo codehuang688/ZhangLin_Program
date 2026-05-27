@@ -1,4 +1,5 @@
-const { routePlans, nearbyServices } = require('../../data/site');
+const { routePlans, nearbyServices, cultureAiQA } = require('../../data/site');
+const { chatWithAI } = require('../../utils/ai-llm');
 
 function getAiTip(hour) {
   if (hour >= 5 && hour < 10) {
@@ -36,6 +37,21 @@ function getRouteMapData(route) {
     return { latitude: m.latitude, longitude: m.longitude };
   });
   return { markers: markers, polyline: [{ points: points, color: '#c89050', width: 4, dottedLine: false, arrowLine: true }] };
+}
+
+function getAiResponse(question) {
+  var lowerQuestion = question.toLowerCase();
+  for (var i = 0; i < cultureAiQA.length; i++) {
+    var qa = cultureAiQA[i];
+    var keywords = qa.keywords || [];
+    var matched = keywords.some(function(k) {
+      return lowerQuestion.includes(k.toLowerCase());
+    });
+    if (matched || lowerQuestion.includes(qa.question.toLowerCase())) {
+      return qa.answer;
+    }
+  }
+  return '阿樟暂时还不太了解这一点，你可以去小程序的其他页面看看，或者咨询现场工作人员。';
 }
 
 Page({
@@ -79,13 +95,18 @@ Page({
     stopMarkers: [],
     showStopDetail: false,
     detailStop: null,
+    currentStopIndex: 0,
     travelTips: [
       '优先选择上午时段进入古港遗址与建筑片区，步行体验更舒适。',
       '首次到访建议从红头船文化展示点开始，先建立整体文化认知。',
       '如为亲子出行，可优先选择研学体验线，内容更集中也更易理解。',
       '夜游线路建议携带便携光源，注意古街部分路段照明较暗。',
       '摄影爱好者推荐清晨或黄昏时段，光线角度最适合出片。'
-    ]
+    ],
+    showAiChat: false,
+    chatMessages: [],
+    inputMessage: '',
+    scrollToId: ''
   },
 
   switchRoute(event) {
@@ -106,7 +127,15 @@ Page({
     var markerId = event.detail.markerId;
     var stop = this.data.activeRoute.stops[markerId];
     if (stop) {
-      this.setData({ showStopDetail: true, detailStop: stop });
+      this.setData({ showStopDetail: true, detailStop: stop, currentStopIndex: markerId });
+    }
+  },
+
+  showStopDetailPopup(event) {
+    var index = parseInt(event.currentTarget.dataset.index);
+    var stop = this.data.activeRoute.stops[index];
+    if (stop) {
+      this.setData({ showStopDetail: true, detailStop: stop, currentStopIndex: index });
     }
   },
 
@@ -130,6 +159,81 @@ Page({
         confirmText: '好的'
       });
     }, 900);
+  },
+
+  openAiChat() {
+    wx.showToast({ title: 'AI向导加载中...', icon: 'loading', duration: 600 });
+    setTimeout(function() {
+      wx.navigateTo({ url: '/pages/ai-chat/ai-chat' });
+    }, 700);
+  },
+
+  closeAiChat() {
+    this.setData({ showAiChat: false });
+  },
+
+  onInputChange(event) {
+    this.setData({ inputMessage: event.detail.value });
+  },
+
+  sendMessage() {
+    var message = this.data.inputMessage.trim();
+    if (!message) {
+      return;
+    }
+    var newId = Date.now().toString();
+    var userMessage = { id: newId, type: 'user', content: message };
+    var currentMessages = this.data.chatMessages.concat([userMessage]);
+    this.setData({
+      chatMessages: currentMessages,
+      inputMessage: '',
+      scrollToId: 'msg-' + newId
+    });
+    
+    var that = this;
+    var loadingId = (Date.now() + 1).toString();
+    var loadingMessage = { id: loadingId, type: 'ai', content: '正在思考中...', isLoading: true };
+    that.setData({
+      chatMessages: currentMessages.concat([loadingMessage]),
+      scrollToId: 'msg-' + loadingId
+    });
+    
+    chatWithAI(currentMessages.slice(0, -1), message, function(toolName, args) {
+      var toolTip = '';
+      if (toolName === 'get_weather') {
+        toolTip = '正在查询' + args.city + '的天气...';
+      } else if (toolName === 'search_web') {
+        toolTip = '正在搜索"' + args.query + '"...';
+      }
+      if (toolTip) {
+        that.setData({
+          chatMessages: currentMessages.concat([userMessage, { id: loadingId, type: 'ai', content: toolTip, isLoading: true }]),
+          scrollToId: 'msg-' + loadingId
+        });
+      }
+    }).then(function(result) {
+      var aiMessage = { 
+        id: (Date.now() + 2).toString(), 
+        type: 'ai', 
+        content: result.content,
+        toolCalls: result.toolCalls
+      };
+      that.setData({
+        chatMessages: currentMessages.concat([userMessage, aiMessage]),
+        scrollToId: 'msg-' + aiMessage.id
+      });
+    }).catch(function(error) {
+      console.error('AI对话出错:', error);
+      var errorMessage = { 
+        id: (Date.now() + 2).toString(), 
+        type: 'ai', 
+        content: '抱歉，阿樟暂时遇到了一点问题。请稍后再试，或者咨询现场工作人员。'
+      };
+      that.setData({
+        chatMessages: currentMessages.concat([userMessage, errorMessage]),
+        scrollToId: 'msg-' + errorMessage.id
+      });
+    });
   },
 
   previewImage(event) {

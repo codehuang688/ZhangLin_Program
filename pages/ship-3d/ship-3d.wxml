@@ -1,0 +1,119 @@
+<view class="container">
+  <view class="header">
+    <view class="header-left" bindtap="goBack">
+      <text class="back-icon">←</text>
+    </view>
+    <view class="header-title">
+      <text class="title-icon">🚢</text>
+      <text class="title-text">3D红头船</text>
+    </view>
+    <view class="header-right">
+      <text class="label-3d">3D</text>
+    </view>
+  </view>
+
+  <view class="sub-title">旋转查看 · 海丝记忆</view>
+
+  <view class="model-container" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd">
+    <view class="model-wrapper">
+      <image 
+        class="ship-image" 
+        src="{{currentImage}}" 
+        mode="aspectFill"
+      />
+    </view>
+    <view class="swipe-hint">左右滑动旋转查看 →</view>
+    <view class="rotation-indicator">
+      <view 
+        wx:for="{{shipImages}}" 
+        wx:for-index="index"
+        wx:key="index"
+        class="indicator-dot {{currentIndex === index ? 'active' : ''}}"
+        bindtap="setImage"
+        data-index="{{index}}"
+      />
+    </view>
+  </view>
+
+  <view class="info-cards">
+    <view class="info-card" bindtap="showDetail" data-type="type">
+      <view class="card-icon">🚢</view>
+      <view class="card-content">
+        <view class="card-title">船型</view>
+        <view class="card-value">广式红头船</view>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+    <view class="info-card" bindtap="showDetail" data-type="size">
+      <view class="card-icon">📏</view>
+      <view class="card-content">
+        <view class="card-title">船长</view>
+        <view class="card-value">约28米</view>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+    <view class="info-card" bindtap="showDetail" data-type="route">
+      <view class="card-icon">🌊</view>
+      <view class="card-content">
+        <view class="card-title">航线</view>
+        <view class="card-value">东南亚多埠</view>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+    <view class="info-card" bindtap="showDetail" data-type="era">
+      <view class="card-icon">📅</view>
+      <view class="card-content">
+        <view class="card-title">年代</view>
+        <view class="card-value">清朝鼎盛期</view>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="detail-section">
+    <view class="section-title">
+      <text class="section-icon">📖</text>
+      <text>红头船故事</text>
+    </view>
+    <view class="story-content">
+      <text>红头船是潮汕地区极具辨识度的海贸船型，因船头与船尾多饰以朱红色而得名。樟林古港曾是粤东重要通商口岸，船只往来频繁，带动了侨乡文化与海贸文明的发展。</text>
+    </view>
+  </view>
+
+  <view class="features-section">
+    <view class="section-title">
+      <text class="section-icon">✨</text>
+      <text>船体特色</text>
+    </view>
+    <view class="features-grid">
+      <view class="feature-item">
+        <view class="feature-icon">🔴</view>
+        <view class="feature-text">红头装饰</view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">⛵</view>
+        <view class="feature-text">双桅帆船</view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">📦</view>
+        <view class="feature-text">载货量大</view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">🌏</view>
+        <view class="feature-text">远洋航行</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal" wx:if="{{showModal}}" bindtap="closeModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">{{modalTitle}}</text>
+        <text class="modal-close" bindtap="closeModal">×</text>
+      </view>
+      <view class="modal-body">
+        <text>{{modalContent}}</text>
+      </view>
+    </view>
+  </view>
+</view>

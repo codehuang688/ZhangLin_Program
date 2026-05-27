@@ -29,7 +29,7 @@
       </block>
     </swiper>
     <view class="hero-panel">
-      <view class="hero-brand">樟林古港文旅服务小程序</view>
+      <view class="hero-brand">樟林归舟</view>
       <view class="hero-copy">深度整合红头船文化、侨乡历史文脉、古港遗址与特色古建筑资源，服务广大游玩游客。</view>
       <view class="hero-actions">
         <view class="button-primary btn-pulse" catchtap="openGuide">立即开始导览</view>

@@ -1,0 +1,57 @@
+<view class="chat-page">
+  <view class="chat-header">
+    <view class="header-left" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <view class="header-center">
+      <text class="chat-avatar">🎧</text>
+      <text class="chat-title">阿樟导览助手</text>
+    </view>
+    <view class="header-right"></view>
+  </view>
+
+  <scroll-view scroll-y class="messages-container" scroll-into-view="{{scrollToId}}" scroll-with-animation>
+    <block wx:for="{{messages}}" wx:key="id">
+      <view class="message-wrapper {{item.role === 'user' ? 'user-wrapper' : 'ai-wrapper'}}">
+        <view class="message-avatar">{{item.role === 'user' ? '👤' : '🎧'}}</view>
+        <view class="message-bubble {{item.role === 'user' ? 'user-bubble' : 'ai-bubble'}}">
+          <text>{{item.content}}</text>
+          <view wx:if="{{item.isLoading}}" class="loading-dots">
+            <view class="dot"></view>
+            <view class="dot"></view>
+            <view class="dot"></view>
+          </view>
+        </view>
+      </view>
+      <view id="msg-{{item.id}}"></view>
+    </block>
+
+    <view wx:if="{{messages.length === 1}}" class="quick-questions">
+      <view class="quick-title">试试问我这些</view>
+      <view class="quick-list">
+        <view class="quick-item" bindtap="quickAsk" data-q="推荐一条半日游路线">推荐一条半日游路线</view>
+        <view class="quick-item" bindtap="quickAsk" data-q="红头船有什么历史故事">红头船有什么历史故事</view>
+        <view class="quick-item" bindtap="quickAsk" data-q="古港附近有什么美食">古港附近有什么美食</view>
+        <view class="quick-item" bindtap="quickAsk" data-q="最近有什么活动">最近有什么活动</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="input-container">
+    <view class="input-wrapper">
+      <input 
+        class="chat-input" 
+        type="text" 
+        value="{{inputText}}" 
+        placeholder="输入你想问的问题..." 
+        bindinput="onInput"
+        bindconfirm="sendMessage"
+        confirm-type="send"
+        focus="{{inputFocused}}"
+      />
+      <view class="send-btn {{inputText ? 'active' : ''}}" bindtap="sendMessage">
+        <text class="send-icon">↑</text>
+      </view>
+    </view>
+  </view>
+</view>

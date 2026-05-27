@@ -87,10 +87,36 @@
   </view>
 
   <view class="section-spacing">
-    <view class="section-title">路线行程</view>
+    <view class="section-title">路线行程图</view>
+    <view class="card flow-chart-card">
+      <view class="flow-chart">
+        <block wx:for="{{activeRoute.stops}}" wx:key="time">
+          <view class="flow-item">
+            <view class="flow-node card-tap-fb" bindtap="showStopDetailPopup" data-index="{{index}}">
+              <view class="flow-number">{{index + 1}}</view>
+            </view>
+            <view class="flow-line" wx:if="{{index < activeRoute.stops.length - 1}}">
+              <view class="flow-arrow"></view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="flow-labels">
+      <block wx:for="{{activeRoute.stops}}" wx:key="time">
+        <view class="flow-label card-tap-fb" bindtap="showStopDetailPopup" data-index="{{index}}">
+          <text class="label-title">{{item.title}}</text>
+          <text class="label-time">{{item.time}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section-spacing">
+    <view class="section-title">行程时间轴</view>
     <view class="timeline-container">
       <block wx:for="{{activeRoute.stops}}" wx:key="time">
-        <view class="timeline-row">
+        <view class="timeline-row card-tap-fb" bindtap="showStopDetailPopup" data-index="{{index}}">
           <view class="timeline-marker">
             <view class="timeline-num">{{index + 1}}</view>
             <view class="timeline-line" wx:if="{{index < activeRoute.stops.length - 1}}"></view>
@@ -136,13 +162,25 @@
   <view class="stop-detail-mask {{showStopDetail ? 'show' : ''}}" bindtap="closeStopDetail"></view>
   <view class="stop-detail-panel {{showStopDetail ? 'show' : ''}}">
     <view class="panel-handle"></view>
-    <view class="panel-stop-time">{{detailStop.time}}</view>
-    <view class="panel-stop-title">{{detailStop.title}}</view>
-    <view class="panel-stop-detail">{{detailStop.detail}}</view>
+    <view class="panel-header">
+      <view class="panel-stop-num">{{currentStopIndex + 1}}</view>
+      <view class="panel-stop-info">
+        <view class="panel-stop-time">{{detailStop.time}}</view>
+        <view class="panel-stop-title">{{detailStop.title}}</view>
+      </view>
+    </view>
+    <scroll-view scroll-y class="panel-content">
+      <view class="panel-stop-detail">{{detailStop.detail}}</view>
+    </scroll-view>
     <view class="panel-actions">
       <view class="panel-btn" bindtap="startVoiceGuide">🎙️ 语音讲解</view>
       <view class="panel-btn primary" bindtap="closeStopDetail">导航到这里</view>
     </view>
+  </view>
+
+  <view class="ai-chat-btn" bindtap="openAiChat">
+    <view class="ai-chat-icon">🎧</view>
+    <view class="ai-chat-text">阿樟导览</view>
   </view>
 
   <view class="back-top {{showBackTop ? 'back-top-show' : ''}}" bindtap="scrollToTop">

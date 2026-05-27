@@ -66,7 +66,7 @@ Page({
   },
 
   onShareAppMessage() {
-    return { title: '樟林古港文旅服务 — 深度整合红头船文化、侨乡文脉与古港遗址', path: '/pages/index/index' };
+    return { title: '樟林归舟 — 深度整合红头船文化、侨乡文脉与古港遗址', path: '/pages/index/index' };
   },
 
   data: {
@@ -190,33 +190,18 @@ Page({
   openAiGuide() {
     wx.showToast({ title: 'AI向导加载中...', icon: 'loading', duration: 600 });
     setTimeout(function() {
-      wx.showModal({
-        title: 'AI 古港助手',
-        content: '你好！我是樟林古港专属AI向导，可以帮你推荐路线、讲解历史、查询活动。请选择下方问题快速体验，或点击"进入对话"开启完整向导。',
-        showCancel: false,
-        confirmText: '好的'
-      });
+      wx.navigateTo({ url: '/pages/ai-chat/ai-chat' });
     }, 700);
   },
 
   aiQuickAsk(event) {
     var q = event.currentTarget.dataset.q;
-    var answers = {
-      '推荐一条半日游路线': '为你推荐「古港半日轻游」：从红头船文化展示点出发，经古港遗址漫步，再到侨乡古建筑群打卡，全程约4小时，节奏轻松，适合首次到访游客。可在导览页查看详细路线。',
-      '红头船有什么历史故事': '红头船是潮汕地区标志性的海贸船型，因船头饰以朱红色而得名。樟林古港在清代是粤东第一大港，红头船往来于东南亚各埠，带动了侨乡文化、海贸文明和跨海移民的历史进程。',
-      '古港附近有什么美食': '樟林古港周边以潮汕风味为主：工夫茶体验、潮式点心、古港茶配、以及各类地方小吃。推荐你在特色风物页面查看更多美食和伴手礼推荐。',
-      '最近有什么活动可以参加': '近期活动包括：周末古港沉浸式讲解专场（每周六10:00）、古街夜游与建筑灯影体验（每周六19:30）、亲子研学打卡任务（节假日全天）。可在活动资讯页面查看详情并报名。'
-    };
-    var answer = answers[q] || '感谢你的提问！AI向导正在努力学习更多古港知识，请稍后再试。';
-    wx.showToast({ title: 'AI思考中...', icon: 'loading', duration: 800 });
+    wx.showToast({ title: 'AI向导加载中...', icon: 'loading', duration: 600 });
     setTimeout(function() {
-      wx.showModal({
-        title: 'AI 古港助手',
-        content: answer,
-        showCancel: false,
-        confirmText: '知道了'
+      wx.navigateTo({ 
+        url: '/pages/ai-chat/ai-chat?question=' + encodeURIComponent(q)
       });
-    }, 900);
+    }, 700);
   },
 
   previewImage(event) {
