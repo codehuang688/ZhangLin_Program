@@ -18,7 +18,6 @@
     "backgroundTextStyle": "light"
   },
   "tabBar": {
-    "custom": true,
     "color": "#7c6f64",
     "selectedColor": "#a34d2e",
     "backgroundColor": "#fffdf9",
@@ -26,23 +25,33 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "assets/icons/tab-home.svg",
+        "selectedIconPath": "assets/icons/tab-home-active.svg"
       },
       {
         "pagePath": "pages/guide/guide",
-        "text": "导览"
+        "text": "导览",
+        "iconPath": "assets/icons/tab-guide.svg",
+        "selectedIconPath": "assets/icons/tab-guide-active.svg"
       },
       {
         "pagePath": "pages/culture/culture",
-        "text": "文化"
+        "text": "文化",
+        "iconPath": "assets/icons/tab-culture.svg",
+        "selectedIconPath": "assets/icons/tab-culture-active.svg"
       },
       {
         "pagePath": "pages/specialty/specialty",
-        "text": "风物"
+        "text": "风物",
+        "iconPath": "assets/icons/tab-specialty.svg",
+        "selectedIconPath": "assets/icons/tab-specialty-active.svg"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "assets/icons/tab-profile.svg",
+        "selectedIconPath": "assets/icons/tab-profile-active.svg"
       }
     ]
   },
