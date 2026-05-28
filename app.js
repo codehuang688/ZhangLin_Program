@@ -8,5 +8,9 @@ App({
     windowWidth: 375,
     windowHeight: 667,
     devicePixelRatio: 2
+  },
+
+  onLaunch() {
+    // 空的启动方法，避免调用废弃的 API
   }
 });
