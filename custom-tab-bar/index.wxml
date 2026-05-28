@@ -2,15 +2,12 @@
   <view
     wx:for="{{list}}"
     wx:key="pagePath"
-    class="tab-item {{selected === index ? 'active' : ''}} {{index === 2 ? 'raised' : ''}}"
+    class="tab-item {{selected === index ? 'active' : ''}}"
     bindtap="switchTab"
     data-path="{{item.pagePath}}"
     data-index="{{index}}"
   >
-    <image
-      class="tab-icon"
-      src="{{selected === index ? item.selectedIconPath : item.iconPath}}"
-    />
+    <text class="tab-icon">{{selected === index ? item.activeIcon : item.icon}}</text>
     <text class="tab-text">{{item.text}}</text>
   </view>
 </view>

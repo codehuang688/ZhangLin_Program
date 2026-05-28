@@ -5,32 +5,32 @@ Component({
       {
         pagePath: '/pages/index/index',
         text: '首页',
-        iconPath: '/assets/icons/tab-home.svg',
-        selectedIconPath: '/assets/icons/tab-home-active.svg'
+        icon: '🏠',
+        activeIcon: '🏠'
       },
       {
         pagePath: '/pages/guide/guide',
         text: '导览',
-        iconPath: '/assets/icons/tab-guide.svg',
-        selectedIconPath: '/assets/icons/tab-guide-active.svg'
+        icon: '🗺️',
+        activeIcon: '🗺️'
       },
       {
         pagePath: '/pages/culture/culture',
         text: '文化',
-        iconPath: '/assets/icons/tab-culture.svg',
-        selectedIconPath: '/assets/icons/tab-culture-active.svg'
+        icon: '📚',
+        activeIcon: '📚'
       },
       {
         pagePath: '/pages/specialty/specialty',
         text: '风物',
-        iconPath: '/assets/icons/tab-specialty.svg',
-        selectedIconPath: '/assets/icons/tab-specialty-active.svg'
+        icon: '🍵',
+        activeIcon: '🍵'
       },
       {
         pagePath: '/pages/profile/profile',
         text: '我的',
-        iconPath: '/assets/icons/tab-profile.svg',
-        selectedIconPath: '/assets/icons/tab-profile-active.svg'
+        icon: '👤',
+        activeIcon: '👤'
       }
     ]
   },

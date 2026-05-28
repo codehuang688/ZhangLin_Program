@@ -118,4 +118,10 @@ class AILLM {
   }
 }
 
+function chatWithAI(messages, userMessage, toolCallback) {
+  const llm = new AILLM();
+  return llm.chat(userMessage);
+}
+
 module.exports = AILLM;
+module.exports.chatWithAI = chatWithAI;
