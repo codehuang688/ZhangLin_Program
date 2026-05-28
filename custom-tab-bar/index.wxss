@@ -6,11 +6,9 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: calc(100rpx + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
+  height: 100rpx;
+  padding-bottom: 20rpx;
   background: rgba(255, 252, 247, 0.95);
-  backdrop-filter: blur(20rpx);
-  -webkit-backdrop-filter: blur(20rpx);
   border-top: 1rpx solid rgba(180, 140, 100, 0.15);
   z-index: 999;
 }
