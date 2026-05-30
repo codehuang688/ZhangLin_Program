@@ -18,3 +18,6 @@ project.private.config.json
 
 # 原始素材
 Zhanglin_Material/
+
+# 图片资源文件夹（太大，不随仓库上传）
+zhanglin_picture/

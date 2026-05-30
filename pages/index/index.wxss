@@ -574,87 +574,64 @@
   transform: translateY(0);
 }
 
-/* ===== 3D红头船展示卡 ===== */
-.ship-showcase {
+/* ===== 随机景点展示卡 ===== */
+.random-spot-showcase {
   background: linear-gradient(135deg, #1a0f06, #2d1810, #1a0f06);
   border: 1rpx solid rgba(200, 150, 100, 0.2);
   overflow: hidden;
 }
 
-.ship-header {
+.random-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20rpx;
 }
 
-.ship-title-row {
+.random-title-row {
   display: flex;
   align-items: center;
   gap: 16rpx;
 }
 
-.ship-icon-3d {
-  font-size: 48rpx;
-  line-height: 1;
-}
-
-.ship-title-group {
+.random-title-group {
   display: flex;
   flex-direction: column;
 }
 
-.ship-name {
+.random-name {
   font-size: 32rpx;
   font-weight: 800;
   color: rgba(255, 240, 220, 0.95);
 }
 
-.ship-subtitle {
+.random-subtitle {
   font-size: 20rpx;
   color: rgba(200, 160, 120, 0.7);
   margin-top: 4rpx;
 }
 
-.ship-badge {
-  padding: 6rpx 16rpx;
-  border-radius: 999rpx;
-  background: linear-gradient(135deg, rgba(200,144,80,0.3), rgba(139,58,26,0.3));
-  border: 1rpx solid rgba(200,160,120,0.3);
-  color: rgba(255,200,140,0.9);
-  font-size: 20rpx;
-  font-weight: 700;
+.random-badge {
+  font-size: 36rpx;
 }
 
-.ship-stage {
+.random-stage {
   position: relative;
   border-radius: 16rpx;
   overflow: hidden;
   background: radial-gradient(ellipse at center, rgba(200,144,80,0.15) 0%, transparent 70%),
               linear-gradient(180deg, rgba(10,5,2,0.6), rgba(30,15,8,0.4));
-  margin-bottom: 20rpx;
+  margin-bottom: 16rpx;
 }
 
-.ship-model {
-  position: relative;
-  padding: 30rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 320rpx;
-  transition: transform 0.5s ease;
-  perspective: 600rpx;
-}
-
-.ship-img {
-  width: 80%;
-  height: 260rpx;
+.random-img {
+  width: 100%;
+  height: 280rpx;
   border-radius: 12rpx;
   box-shadow: 0 8rpx 40rpx rgba(0,0,0,0.4);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
-.ship-glow {
+.random-glow {
   position: absolute;
   bottom: 20rpx;
   left: 50%;
@@ -667,7 +644,7 @@
   animation: pulse 2s ease-in-out infinite;
 }
 
-.ship-hint {
+.random-hint {
   position: absolute;
   bottom: 8rpx;
   left: 0;
@@ -677,35 +654,12 @@
   color: rgba(200, 160, 120, 0.6);
 }
 
-.ship-specs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12rpx;
-}
-
-.ship-spec {
+.random-desc {
   text-align: center;
-  padding: 16rpx 8rpx;
-  background: rgba(255, 240, 220, 0.06);
-  border-radius: 12rpx;
-  border: 1rpx solid rgba(200, 150, 100, 0.12);
-}
-
-.spec-icon {
-  font-size: 32rpx;
-  margin-bottom: 6rpx;
-}
-
-.spec-label {
-  font-size: 18rpx;
-  color: rgba(200, 160, 120, 0.6);
-}
-
-.spec-value {
-  margin-top: 4rpx;
   font-size: 22rpx;
-  font-weight: 700;
-  color: rgba(255, 230, 200, 0.85);
+  color: rgba(200, 160, 120, 0.5);
+  padding-top: 8rpx;
+  border-top: 1rpx solid rgba(200, 150, 100, 0.12);
 }
 
 /* ===== 智慧地图 ===== */

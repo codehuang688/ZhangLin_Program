@@ -130,12 +130,7 @@ Page({
       { id: 3, latitude: 23.464, longitude: 116.783, width: 30, height: 30, title: '侨乡建筑群', callout: { content: '侨乡古建筑群', padding: 8, borderRadius: 8, display: 'ALWAYS', bgColor: '#8b3a1a', color: '#fff' } },
       { id: 4, latitude: 23.459, longitude: 116.777, width: 30, height: 30, title: '侨史记忆长廊', callout: { content: '侨史记忆长廊', padding: 8, borderRadius: 8, display: 'ALWAYS', bgColor: '#8b3a1a', color: '#fff' } }
     ],
-    shipFeatures: [
-      { icon: '🚢', label: '船型', value: '广式红头船' },
-      { icon: '📏', label: '船长', value: '约 28 米' },
-      { icon: '🌊', label: '航线', value: '东南亚多埠' },
-      { icon: '📜', label: '年代', value: '清朝鼎盛期' }
-    ],
+
     showBackTop: false,
     typewriterText: '',
     typewriterFull: '',
@@ -173,6 +168,12 @@ Page({
     const { id } = event.currentTarget.dataset;
     wx.navigateTo({
       url: `/pages/scenic-detail/scenic-detail?id=${id}`
+    });
+  },
+
+  goRandomSpot() {
+    wx.navigateTo({
+      url: '/pages/ship-3d/ship-3d'
     });
   },
 

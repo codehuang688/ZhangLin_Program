@@ -1,7 +1,7 @@
 .container {
   min-height: 100vh;
-  background: linear-gradient(180deg, #1a0f0a 0%, #2d1810 100%);
-  padding-bottom: 40rpx;
+  background: linear-gradient(180deg, #1a0f0a 0%, #0d0a08 50%, #1a0f0a 100%);
+  padding-bottom: 60rpx;
 }
 
 .header {
@@ -19,6 +19,7 @@
   justify-content: center;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  backdrop-filter: blur(10px);
 }
 
 .back-icon {
@@ -49,13 +50,12 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #d4a574 0%, #c19660 100%);
-  border-radius: 16rpx;
+  border-radius: 50%;
+  box-shadow: 0 4rpx 20rpx rgba(212, 165, 116, 0.4);
 }
 
-.label-3d {
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #fff;
+.refresh-icon {
+  font-size: 32rpx;
 }
 
 .sub-title {
@@ -65,152 +65,131 @@
   margin-bottom: 30rpx;
 }
 
-.model-container {
+.cards-container {
   padding: 0 30rpx;
-  margin-bottom: 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
 }
 
-.model-wrapper {
-  width: 100%;
-  height: 400rpx;
-  background: rgba(255, 255, 255, 0.05);
+.card {
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 24rpx;
   overflow: hidden;
-  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.3);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-.ship-image {
+.card:active {
+  transform: scale(0.98);
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 280rpx;
+}
+
+.card-image {
   width: 100%;
   height: 100%;
-  transition: transform 0.3s ease;
 }
 
-.swipe-hint {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.5);
+.card-overlay {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+}
+
+.card-tag {
+  padding: 8rpx 20rpx;
+  background: rgba(212, 165, 116, 0.9);
+  border-radius: 20rpx;
   font-size: 22rpx;
-  margin-top: 20rpx;
+  color: #fff;
+  font-weight: 500;
 }
 
-.rotation-indicator {
-  display: flex;
-  justify-content: center;
-  gap: 16rpx;
-  margin-top: 20rpx;
-}
-
-.indicator-dot {
-  width: 16rpx;
-  height: 16rpx;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.indicator-dot.active {
-  width: 40rpx;
-  border-radius: 8rpx;
-  background: linear-gradient(135deg, #d4a574 0%, #c19660 100%);
-}
-
-.info-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20rpx;
-  padding: 0 30rpx;
-  margin-bottom: 40rpx;
-}
-
-.info-card {
-  display: flex;
-  align-items: center;
-  padding: 24rpx;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 16rpx;
-  border: 1rpx solid rgba(255, 255, 255, 0.1);
-}
-
-.info-card:active {
-  transform: scale(0.98);
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.card-icon {
-  font-size: 40rpx;
-  margin-right: 20rpx;
+.card-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background: linear-gradient(0deg, rgba(26, 15, 10, 0.9) 0%, transparent 100%);
+  pointer-events: none;
 }
 
 .card-content {
-  flex: 1;
+  padding: 24rpx;
 }
 
 .card-title {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 4rpx;
-}
-
-.card-value {
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #fff;
-}
-
-.card-arrow {
   font-size: 32rpx;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.detail-section, .features-section {
-  margin: 0 30rpx 30rpx;
-  padding: 30rpx;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20rpx;
-}
-
-.section-title {
-  display: flex;
-  align-items: center;
-  gap: 10rpx;
-  margin-bottom: 20rpx;
-  font-size: 30rpx;
   font-weight: bold;
   color: #fff;
+  margin-bottom: 12rpx;
 }
 
-.section-icon {
+.card-description {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 16rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-location {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.location-icon {
+  font-size: 20rpx;
+}
+
+.card-action {
+  font-size: 24rpx;
+  color: #d4a574;
+  font-weight: 500;
+}
+
+.refresh-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  margin-top: 40rpx;
+  padding: 24rpx;
+  background: rgba(212, 165, 116, 0.1);
+  border-radius: 40rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.refresh-hint:active {
+  background: rgba(212, 165, 116, 0.2);
+}
+
+.hint-icon {
   font-size: 28rpx;
 }
 
-.story-content {
+.refresh-hint text {
   font-size: 26rpx;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.8;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20rpx;
-}
-
-.feature-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20rpx;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12rpx;
-}
-
-.feature-icon {
-  font-size: 36rpx;
-  margin-bottom: 10rpx;
-}
-
-.feature-text {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.8);
+  color: #d4a574;
 }
 
 .modal {
@@ -219,19 +198,21 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(10px);
 }
 
 .modal-content {
-  width: 85%;
-  max-height: 70vh;
+  width: 90%;
+  max-height: 85vh;
   background: linear-gradient(180deg, #2d1810 0%, #1a0f0a 100%);
   border-radius: 24rpx;
   overflow: hidden;
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-header {
@@ -243,24 +224,53 @@
 }
 
 .modal-title {
-  font-size: 32rpx;
+  font-size: 36rpx;
   font-weight: bold;
   color: #fff;
 }
 
 .modal-close {
-  font-size: 48rpx;
+  font-size: 52rpx;
   color: rgba(255, 255, 255, 0.6);
   line-height: 1;
 }
 
+.modal-image-wrapper {
+  width: 100%;
+  height: 360rpx;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+}
+
 .modal-body {
   padding: 30rpx;
-  max-height: 50vh;
+  max-height: 40vh;
   overflow-y: auto;
 }
 
-.modal-body text {
+.modal-category {
+  display: inline-block;
+  padding: 8rpx 20rpx;
+  background: rgba(212, 165, 116, 0.2);
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  color: #d4a574;
+  margin-bottom: 16rpx;
+}
+
+.modal-location {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 20rpx;
+}
+
+.modal-description {
   font-size: 28rpx;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.8;

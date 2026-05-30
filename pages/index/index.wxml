@@ -77,32 +77,23 @@
   </view>
 
   <view class="section-spacing scroll-fade {{anim_sf_ship ? 'in-view' : ''}}" id="sf_ship">
-    <view class="card ship-showcase">
-      <view class="ship-header">
-        <view class="ship-title-row">
-          <view class="ship-icon-3d">🚢</view>
-          <view class="ship-title-group">
-            <view class="ship-name">3D 红头船</view>
-            <view class="ship-subtitle">旋转查看 · 海丝记忆</view>
+    <view class="card random-spot-showcase" bindtap="goRandomSpot">
+      <view class="random-header">
+        <view class="random-title-row">
+          <view class="random-title-group">
+            <view class="random-name">随机景点</view>
+            <view class="random-subtitle">随机发现 · 探索古港</view>
           </view>
         </view>
-        <view class="ship-badge">3D</view>
+        <view class="random-badge">🎲</view>
       </view>
-      <view class="ship-stage">
-        <view class="ship-model" bindtap="rotateShip">
-          <image class="ship-img" src="/assets/images/red-ship.jpg" mode="aspectFit" />
-          <view class="ship-glow"></view>
-          <view class="ship-hint">左右滑动旋转查看 ›</view>
-        </view>
+      <view class="random-stage">
+        <image class="random-img" src="/zhanglin_picture/0.樟林古港石碑.jpg" mode="aspectFit" />
+        <view class="random-glow"></view>
+        <view class="random-hint">点击发现新景点 ›</view>
       </view>
-      <view class="ship-specs">
-        <block wx:for="{{shipFeatures}}" wx:key="label">
-          <view class="ship-spec">
-            <view class="spec-icon">{{item.icon}}</view>
-            <view class="spec-label">{{item.label}}</view>
-            <view class="spec-value">{{item.value}}</view>
-          </view>
-        </block>
+      <view class="random-desc">
+        <text>每次刷新，发现不同的樟林古港景点</text>
       </view>
     </view>
   </view>
